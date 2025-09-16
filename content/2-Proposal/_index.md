@@ -1,6 +1,6 @@
 ---
 title: "Proposal"
-date: "`r Sys.Date()`"
+date: "2025-09-09"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "

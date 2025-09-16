@@ -1,57 +1,40 @@
 ---
 title: "Week 1 Worklog"
-date: "`r Sys.Date()`"
+date: "2025-09-08"
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 1 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Understand AWS policies and professional workspace etiquette.
+* Connect with members in the First Cloud Journey program.
+* Form a team and develop a project plan.
+* Learn basic AWS services and specialized knowledge for the project.
+
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+
+| Day | Task | Date | Reference Material |
+| --- | ---- | ---- | ------------------ |
+| 2 | - Read AWS FCJ internship policies and guidelines.<br> - Get acquainted with mentors and students in FCJ.<br> - Form a team of five members. | 09/08/2025 | [FCJ Policies and Guidelines](https://policies.fcjuni.com/) |
+| 3 | - Get familiar with the AWS office environment.<br> - Learn how to present an AWS workshop and start writing worklog for the first week. | 09/09/2025 | [AWS Workshop Guide](https://youtu.be/mXRqgMr_97U?si=sfsgpbaRwhDLu7W7) |
+| 4 | - Getting started with lessons from the First Cloud Journey Bootcamp playlist:<br>&emsp; + AWS cloud computing technology<br>&emsp; + Creating and managing an AWS account<br>&emsp; + AWS Virtual Private Cloud (VPC) | 09/10/2025 | [First Cloud Journey Bootcamp - 2025](https://youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&si=3q55-FQdiMV_gSMv) |
+| 5 | - Finish studying FCJ Bootcamp lessons:<br>&emsp; + Compute VMs on AWS<br>&emsp; + AWS security services<br>&emsp; + AWS database services | 09/11/2025 | [First Cloud Journey Bootcamp - 2025](https://youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&si=3q55-FQdiMV_gSMv) |
+| 6 | - Study basic JavaScript syntax and features on Coursera. | 09/12/2025 | [Interactivity with JavaScript](https://www.coursera.org/learn/javascript/) |
+| 7 | - Meet with team to plan the first project.<br> - Finalize the weekly worklog by adding achievements. | 09/13/2025 | |
 
 
 ### Week 1 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Reviewed and understood AWS FCJ internship policies and guidelines.
+* Went to the AWS office for the first time, gaining familiarity with workplace environment.
+* Connected with mentors and fellow students in the FCJ program, formed a team of five members for project work.
+* Initiated this internship report and wrote the first weekly worklog.
+* Completed all lessons from the First Cloud Journey Bootcamp playlist.
+  * Learned the basics of AWS services
+  * Created an AWS free tier account
+  * Practiced managing services using the AWS account
+* Acquired foundational knowledge of JavaScript syntax and features through Coursera’s Interactivity with JavaScript course.
+* Collaborated with the team to plan the first project, defining the name, objectives, roles and timelines.
