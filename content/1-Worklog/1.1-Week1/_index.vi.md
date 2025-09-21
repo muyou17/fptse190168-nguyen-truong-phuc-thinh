@@ -21,8 +21,7 @@ pre: " <b> 1.1. </b> "
 | 3 | - Làm quen với môi trường làm việc tại văn phòng AWS.<br> - Học cách làm workshop AWS và bắt đầu ghi worklog cho tuần đầu tiên. | 09/09/2025 | [Cách Làm Workshop AWS](https://youtu.be/mXRqgMr_97U?si=sfsgpbaRwhDLu7W7) |
 | 4 | - Bắt đầu học các bài giảng từ danh sách phát First Cloud Journey Bootcamp:<br>&emsp; + Công nghệ điện toán đám mây của AWS<br>&emsp; + Tạo và quản lý tài khoản AWS<br>&emsp; + AWS Virtual Private Cloud (VPC) | 10/09/2025 | [First Cloud Journey Bootcamp - 2025](https://youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&si=3q55-FQdiMV_gSMv) |
 | 5 | - Hoàn thành các bài giảng trong FCJ Bootcamp:<br>&emsp; + Dịch vụ máy ảo trên AWS<br>&emsp; + Dịch vụ bảo mật trên AWS<br>&emsp; + Dịch vụ cơ sở dữ liệu trên AWS | 11/09/2025 | [First Cloud Journey Bootcamp - 2025](https://youtube.com/playlist?list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&si=3q55-FQdiMV_gSMv) |
-| 6 | - Tìm hiểu cú pháp và tính năng cơ bản của JavaScript trên Coursera. | 12/08/2025 | [Tương tác với JavaScript](https://www.coursera.org/learn/javascript/) |
-| 7 | - Họp với nhóm để lập kế hoạch cho dự án đầu tiên.<br> - Hoàn thành worklog của tuần với các kết quả đạt được. | 13/09/2025 | |
+| 6 | - Họp với nhóm để lập kế hoạch cho dự án đầu tiên.<br> - Hoàn thành worklog của tuần với các kết quả đạt được. | 12/09/2025 | |
 
 
 ### Kết quả đạt được tuần 1:
@@ -35,5 +34,4 @@ pre: " <b> 1.1. </b> "
   * Nắm được các khái niệm cơ bản về những dịch vụ của AWS.
   * Tạo thành công tài khoản AWS bậc miễn phí.
   * Thực hành quản lý các dịch vụ bằng tài khoản AWS.
-* Học được kiến thức nền tảng về cú pháp và tính năng của JavaScript thông qua khóa học “Interactivity with JavaScript” trên Coursera.
-* Họp với nhóm để lên kế hoạch cho dự án đầu tiên, xác định tên dự án, mục tiêu, vai trò và thời gian thực hiện.
+* Họp với nhóm để lên kế hoạch cho dự án đầu tiên, xác định tên dự án, mục tiêu và thời gian thực hiện.
