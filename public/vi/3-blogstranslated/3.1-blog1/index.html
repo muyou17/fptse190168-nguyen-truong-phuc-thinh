@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.151.0">
+    <meta
+  name="description"
+  content=""
+/>
+<meta name="author" content="thienlh@thienlu.com" />
+
+    <link rel="icon" href="/workshop-template/images/favicon.png" type="image/png">
+
+    <title>Blog 1 :: Báo cáo thực tập</title>
+
+    
+    <link href="/workshop-template/css/nucleus.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/fontawesome-all.min.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/hybrid.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/featherlight.min.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/perfect-scrollbar.min.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/auto-complete.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/atom-one-dark-reasonable.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/theme.css?1760185972" rel="stylesheet">
+    <link href="/workshop-template/css/hugo-theme.css?1760185972" rel="stylesheet">
+    
+    <link href="/workshop-template/css/theme-workshop.css?1760185972" rel="stylesheet">
+    
+    
+
+    <script src="/workshop-template/js/jquery-3.3.1.min.js?1760185972"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/workshop-template/vi/3-blogstranslated/3.1-blog1/">
+    <nav
+  id="sidebar"
+  class="showVisitedLinks"
+>
+   
+  <div id="header-wrapper">
+    <div id="header"><a id="logo" href="/">
+  <svg
+    id="Layer_1"
+    data-name="Layer 1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 60 30"
+    width="30%"
+  >
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #fff;
+        }
+        .cls-2 {
+          fill: #f90;
+          fill-rule: evenodd;
+        }
+      </style>
+    </defs>
+    <title>AWS-Logo_White-Color</title>
+    <path
+      class="cls-1"
+      d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"
+    ></path>
+    <path
+      class="cls-2"
+      d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"
+    ></path>
+    <path
+      class="cls-2"
+      d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"
+    ></path>
+  </svg>
+</a>
+</div>
+     <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/workshop-template/js/lunr.min.js?1760185972"></script>
+<script type="text/javascript" src="/workshop-template/js/auto-complete.js?1760185972"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/thienluhoan.github.io\/workshop-template\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/workshop-template/js/search.js?1760185972"></script>
+ 
+  </div>
+
+  <div class="highlightable">
+    <ul class="topics">
+               
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/"
+  title="Nhật ký công việc"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/">
+     <b> 1. </b> Nhật ký công việc 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.5-week5/"
+  title="Nhật ký công việc Tuần 5"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.5-week5/">
+     <b> 1.5. </b> Nhật ký công việc Tuần 5 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.4-week4/"
+  title="Nhật ký công việc Tuần 4"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.4-week4/">
+     <b> 1.4. </b> Nhật ký công việc Tuần 4 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.3-week3/"
+  title="Nhật ký công việc Tuần 3"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.3-week3/">
+     <b> 1.3. </b> Nhật ký công việc Tuần 3 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.2-week2/"
+  title="Nhật ký công việc Tuần 2"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.2-week2/">
+     <b> 1.2. </b> Nhật ký công việc Tuần 2 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.6-week6/"
+  title="Worklog Tuần 6"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.6-week6/">
+     <b> 1.6. </b> Worklog Tuần 6 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.7-week7/"
+  title="Worklog Tuần 7"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.7-week7/">
+     <b> 1.7. </b> Worklog Tuần 7 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.8-week8/"
+  title="Worklog Tuần 8"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.8-week8/">
+     <b> 1.8. </b> Worklog Tuần 8 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.9-week9/"
+  title="Worklog Tuần 9"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.9-week9/">
+     <b> 1.9. </b> Worklog Tuần 9 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.1-week1/"
+  title="Nhật ký công việc Tuần 1"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.1-week1/">
+     <b> 1.1. </b> Nhật ký công việc Tuần 1 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.10-week10/"
+  title="Worklog Tuần 10"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.10-week10/">
+     <b> 1.10. </b> Worklog Tuần 10 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.11-week11/"
+  title="Worklog Tuần 11"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.11-week11/">
+     <b> 1.11. </b> Worklog Tuần 11 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/1-worklog/1.12-week12/"
+  title="Worklog Tuần 12"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/1-worklog/1.12-week12/">
+     <b> 1.12 </b> Worklog Tuần 12 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/workshop-template/vi/2-proposal/"
+  title="Bản đề xuất"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/2-proposal/">
+     <b> 2. </b> Bản đề xuất 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+           
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/"
+  title="Các bài blogs đã dịch"
+  class="dd-item 
+        parent
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/">
+     <b> 3. </b> Các bài blogs đã dịch 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/3.2-blog2/"
+  title="Blog 2"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/3.2-blog2/">
+     <b> 3.2. </b> Blog 2 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/3.3-blog3/"
+  title="Blog 3"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/3.3-blog3/">
+     <b> 3.3. </b> Blog 3 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/3.4-blog4/"
+  title="Blog 4"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/3.4-blog4/">
+     <b> 3.4. </b> Blog 4 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/3.5-blog5/"
+  title="Blog 5"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/3.5-blog5/">
+     <b> 3.6. </b> Blog 5 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/3.6-blog6/"
+  title="Blog 6"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/3.6-blog6/">
+     <b> 3.6. </b> Blog 6 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/3-blogstranslated/3.1-blog1/"
+  title="Blog 1"
+  class="dd-item 
+        
+        active
+        
+        "
+>
+  <a href="/workshop-template/vi/3-blogstranslated/3.1-blog1/">
+     <b> 3.1. </b> Blog 1 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/workshop-template/vi/4-eventparticipated/"
+  title="Các events đã tham gia"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/4-eventparticipated/">
+     <b> 4. </b> Các events đã tham gia 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/workshop-template/vi/4-eventparticipated/4.1-event1/"
+  title="Event 1"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/4-eventparticipated/4.1-event1/">
+     <b> 4.1. </b> Event 1 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/4-eventparticipated/4.2-event2/"
+  title="Event 2"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/4-eventparticipated/4.2-event2/">
+     <b> 4.2. </b> Event 2 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/"
+  title="Workshop"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/">
+     <b> 5. </b> Workshop 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.1-workshop-overview/"
+  title="Giới thiệu"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.1-workshop-overview/">
+     <b> 5.1. </b> Giới thiệu 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.2-prerequiste/"
+  title="Các bước chuẩn bị"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.2-prerequiste/">
+     <b> 5.2. </b> Các bước chuẩn bị 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.3-s3-vpc/"
+  title="Truy cập S3 từ VPC"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.3-s3-vpc/">
+     <b> 5.3. </b> Truy cập S3 từ VPC 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.3-s3-vpc/5.3.1-create-gwe/"
+  title="Tạo một Gateway Endpoint"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.3-s3-vpc/5.3.1-create-gwe/">
+     <b> 5.3.1 </b> Tạo một Gateway Endpoint 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.3-s3-vpc/5.3.2-test-gwe/"
+  title="Kiểm tra Gateway Endpoint"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.3-s3-vpc/5.3.2-test-gwe/">
+     <b> 5.3.2 </b> Kiểm tra Gateway Endpoint 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.4-s3-onprem/"
+  title="Truy cập S3 từ môi trường truyền thống"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.4-s3-onprem/">
+     <b> 5.4. </b> Truy cập S3 từ môi trường truyền thống 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.1-prepare/"
+  title="Chuẩn bị tài nguyên"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.1-prepare/">
+     <b> 5.4.1 </b> Chuẩn bị tài nguyên 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.2-create-interface-enpoint/"
+  title="Tạo một S3 Interface endpoint"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.2-create-interface-enpoint/">
+     <b> 5.4.2 </b> Tạo một S3 Interface endpoint 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.3-test-endpoint/"
+  title="Kiểm tra Interface Endpoint"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.3-test-endpoint/">
+     <b> 5.4.3 </b> Kiểm tra Interface Endpoint 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.4-dns-simulation/"
+  title="Mô phỏng On-premises DNS "
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.4-s3-onprem/5.4.4-dns-simulation/">
+     <b> 5.4.4 </b> Mô phỏng On-premises DNS  
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.5-policy/"
+  title="VPC Endpoint Policies"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.5-policy/">
+     <b> 5.5 </b> VPC Endpoint Policies 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/workshop-template/vi/5-workshop/5.6-cleanup/"
+  title="Dọn dẹp tài nguyên"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/5-workshop/5.6-cleanup/">
+     <b> 5.6. </b> Dọn dẹp tài nguyên 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/workshop-template/vi/6-self-evaluation/"
+  title="Tự đánh giá"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/6-self-evaluation/">
+     <b> 6. </b> Tự đánh giá 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+           
+<li
+  data-nav-id="/workshop-template/vi/7-feedback/"
+  title="Chia sẻ, đóng góp ý kiến"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/workshop-template/vi/7-feedback/">
+     <b> 7. </b> Chia sẻ, đóng góp ý kiến 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+    </ul>
+
+     
+    <section id="shortcuts">
+      <h3>
+        More
+      </h3>
+      <ul>
+        
+        <li>
+          <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"
+            ><i class='fab fa-facebook'></i> AWS Study Group</a
+          >
+        </li>
+        
+      </ul>
+    </section>
+     
+    <section id="prefooter">
+      <hr />
+      <ul>
+        
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+            <div class="select-style">
+              <select id="select-language" onchange="location = this.value;">
+                       
+                <option
+                  id="en"
+                  value="https://thienluhoan.github.io/workshop-template/3-blogstranslated/3.1-blog1/"
+                >
+                  English
+                </option>
+                            
+                <option
+                  id="vi"
+                  value="https://thienluhoan.github.io/workshop-template/vi/3-blogstranslated/3.1-blog1/"
+                  selected
+                >
+                  Tiếng Việt
+                </option>
+                   
+              </select>
+              <svg
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                width="255px"
+                height="255px"
+                viewBox="0 0 255 255"
+                style="enable-background: new 0 0 255 255"
+                xml:space="preserve"
+              >
+                <g>
+                  <g id="arrow-drop-down">
+                    <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </a>
+        </li>
+         
+        <li>
+          <a class="padding" href="#" data-clear-history-toggle=""
+            ><i class="fas fa-history fa-fw"></i> Clear History</a
+          >
+        </li>
+        
+      </ul>
+    </section>
+    
+    <section id="footer"><left>
+    
+    <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0"
+        title="Migrate" Alt="web counter" border="0" /></a> <br>
+    <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0"
+        title="Total CLoud Journey" Alt="web counter" border="0" />
+
+</left>
+<left>
+    <br>
+    <br>
+    <b>Last Updated</b><br>
+    <i>
+        <span id="lastUpdated" style="color:orange;"></span>
+    </i>
+
+    <script>
+        
+        const today = new Date();
+        
+        const formattedDate = today.toLocaleDateString('en-GB');
+        
+        document.getElementById('lastUpdated').textContent = formattedDate;
+    </script>
+</left>
+<left>
+    <br>
+    <br>
+    <b> Team </b> <br>
+
+    <i> <a href="https://www.facebook.com/groups/660548818043427" style="color:orange">First Cloud Journey </a> <br>
+
+    </i>
+</left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script></section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/workshop-template/vi/'>Báo cáo thực tập</a> > <a href='/workshop-template/vi/3-blogstranslated/'>Các bài blogs đã dịch</a> > Blog 1
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+  <div class="wrapper"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#comet-sẵn-sàng-cho-doanh-nghiệp-trên-sagemaker-ai">Comet sẵn sàng cho doanh nghiệp trên SageMaker AI</a>
+      <ul>
+        <li><a href="#hành-trình-của-quản-trị-viên">Hành trình của quản trị viên</a></li>
+        <li><a href="#hành-trình-của-người-dùng">Hành trình của người dùng</a></li>
+      </ul>
+    </li>
+    <li><a href="#tổng-quan-về-giải-pháp">Tổng quan về giải pháp</a>
+      <ul>
+        <li><a href="#điều-kiện-tiên-quyết">Điều kiện tiên quyết</a></li>
+        <li><a href="#chuẩn-bị-tập-dữ-liệu">Chuẩn bị tập dữ liệu</a></li>
+        <li><a href="#bắt-đầu-một-thí-nghiệm-comet">Bắt đầu một thí nghiệm Comet</a></li>
+        <li><a href="#tiền-xử-lý-dữ-liệu">Tiền xử lý dữ liệu</a></li>
+        <li><a href="#quy-trình-thí-nghiệm-comet-và-sagemaker-ai">Quy trình thí nghiệm Comet và SageMaker AI</a></li>
+        <li><a href="#chạy-các-thí-nghiệm">Chạy các thí nghiệm</a></li>
+        <li><a href="#xem-các-thí-nghiệm-comet-trong-giao-diện-người-dùng">Xem các thí nghiệm Comet trong giao diện người dùng</a></li>
+        <li><a href="#dọn-dẹp">Dọn dẹp</a></li>
+      </ul>
+    </li>
+    <li><a href="#lợi-ích-của-tích-hợp-sagemaker-và-comet">Lợi ích của tích hợp SageMaker và Comet</a>
+      <ul>
+        <li><a href="#phát-triển-mô-hình-được-đơn-giản-hóa">Phát triển mô hình được đơn giản hóa</a></li>
+        <li><a href="#hợp-tác-và-quản-trị-doanh-nghiệp">Hợp tác và quản trị doanh nghiệp</a></li>
+        <li><a href="#tích-hợp-vòng-đời-ml-hoàn-chỉnh">Tích hợp vòng đời ML hoàn chỉnh</a></li>
+      </ul>
+    </li>
+    <li><a href="#kết-luận">Kết luận</a></li>
+    <li><a href="#về-các-tác-giả">Về các tác giả</a></li>
+  </ul>
+</nav></div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Blog 1
+            </h1>
+          
+
+        
+
+
+
+	<h1 id="thí-nghiệm-ml-nhanh-chóng-cho-doanh-nghiệp-với-amazon-sagemaker-ai-và-comet">Thí nghiệm ML nhanh chóng cho doanh nghiệp với Amazon SageMaker AI và Comet</h1>
+<p><em>Bài đăng này được viết cùng với Sarah Ostermeier từ Comet.</em></p>
+<p>Khi các tổ chức doanh nghiệp mở rộng các sáng kiến học máy (ML) từ giai đoạn chứng minh ý tưởng sang sản xuất, độ phức tạp trong việc quản lý các thí nghiệm, theo dõi dòng dõi mô hình, và quản lý khả năng tái tạo tăng lên theo cấp số nhân. Điều này chủ yếu là do các nhà khoa học dữ liệu và kỹ sư ML liên tục khám phá các kết hợp khác nhau của siêu tham số, kiến trúc mô hình, và phiên bản tập dữ liệu, tạo ra lượng lớn siêu dữ liệu cần được theo dõi để đảm bảo khả năng tái tạo và tuân thủ quy định. Khi việc phát triển mô hình ML mở rộng qua nhiều đội nhóm và yêu cầu quy định ngày càng nghiêm ngặt, việc theo dõi thí nghiệm trở nên phức tạp hơn bao giờ hết. Với các quy định AI ngày càng tăng, <a href="https://artificialintelligenceact.eu/">đặc biệt là ở EU</a>, các tổ chức hiện yêu cầu các bản ghi kiểm toán chi tiết về dữ liệu huấn luyện mô hình, kỳ vọng hiệu suất, và quy trình phát triển, khiến việc theo dõi thí nghiệm trở thành một nhu cầu kinh doanh thiết yếu, không chỉ là một thực hành tốt nhất.</p>
+<p><a href="https://aws.amazon.com/sagemaker-ai/">Amazon SageMaker AI</a> cung cấp cơ sở hạ tầng được quản lý mà các doanh nghiệp cần để mở rộng khối lượng công việc ML, xử lý việc cung cấp tính toán, huấn luyện phân tán, và triển khai mà không cần gánh nặng cơ sở hạ tầng. Tuy nhiên, các đội nhóm vẫn cần khả năng theo dõi thí nghiệm mạnh mẽ, so sánh mô hình, và khả năng cộng tác vượt xa việc ghi log cơ bản.</p>
+<p><a href="https://www.comet.com/site/">Comet</a> là một nền tảng quản lý thí nghiệm ML toàn diện, tự động theo dõi, so sánh, và tối ưu hóa các thí nghiệm ML trong suốt vòng đời mô hình. Nó cung cấp cho các nhà khoa học dữ liệu và kỹ sư ML các công cụ mạnh mẽ để theo dõi thí nghiệm, giám sát mô hình, tối ưu hóa siêu tham số, và phát triển mô hình cộng tác. Nó cũng cung cấp <a href="https://www.comet.com/site/products/opik/">Opik</a>, nền tảng mã nguồn mở của Comet để quan sát và phát triển LLM.</p>
+<p>Comet có sẵn trong SageMaker AI dưới dạng một <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/partner-apps.html">Ứng dụng AI Đối tác</a>, như một khả năng quản lý thí nghiệm được quản lý hoàn toàn, với bảo mật cấp doanh nghiệp, tích hợp quy trình làm việc liền mạch, và quy trình mua sắm đơn giản thông qua <a href="https://aws.amazon.com/marketplace/pp/prodview-etdyy6ne2onzg">AWS Marketplace</a>.</p>
+<p>Sự kết hợp này đáp ứng nhu cầu của một quy trình làm việc ML doanh nghiệp từ đầu đến cuối, trong đó SageMaker AI xử lý cơ sở hạ tầng và tính toán, còn Comet cung cấp khả năng quản lý thí nghiệm, đăng ký mô hình, và giám sát sản xuất mà các đội nhóm yêu cầu để tuân thủ quy định và hiệu quả vận hành. Trong bài đăng này, chúng tôi thể hiện một quy trình phát hiện gian lận hoàn chỉnh bằng cách sử dụng SageMaker AI với Comet, thể hiện khả năng tái tạo và ghi log sẵn sàng kiểm toán mà các doanh nghiệp cần hiện nay.</p>
+<h2 id="comet-sẵn-sàng-cho-doanh-nghiệp-trên-sagemaker-ai">Comet sẵn sàng cho doanh nghiệp trên SageMaker AI</h2>
+<p>Trước khi tiến hành các hướng dẫn cài đặt, các tổ chức phải xác định <a href="https://docs.aws.amazon.com/whitepapers/latest/sagemaker-studio-admin-best-practices/operating-model.html">mô hình vận hành</a> của mình và dựa trên đó, quyết định cách cài đặt Comet. Chúng tôi khuyên bạn nên triển khai Comet bằng cách sử dụng mô hình vận hành liên kết. Trong kiến trúc này, Comet được quản lý tập trung và lưu trữ trong một tài khoản dịch vụ chia sẻ, và mỗi đội ngũ khoa học dữ liệu duy trì các môi trường hoàn toàn tự trị. Mỗi mô hình vận hành đi kèm với những lợi ích và hạn chế riêng. Để biết thêm thông tin, hãy tham khảo Thực hành tốt nhất cho <a href="https://docs.aws.amazon.com/whitepapers/latest/sagemaker-studio-admin-best-practices/sagemaker-studio-admin-best-practices.html">Quản trị Amazon SageMaker Studio</a>.</p>
+<p>Hãy cùng đi sâu vào việc cài đặt Comet trong SageMaker AI. Các doanh nghiệp lớn thường có các vai trò sau:</p>
+<ul>
+<li><strong>Quản trị viên</strong> – Chịu trách nhiệm thiết lập các dịch vụ cơ sở hạ tầng chung và môi trường cho các đội nhóm sử dụng trường hợp.</li>
+<li><strong>Người dùng</strong> – Các nhà thực hành ML từ các đội nhóm sử dụng trường hợp, sử dụng các môi trường do đội nền tảng thiết lập để giải quyết các vấn đề kinh doanh của họ.</li>
+</ul>
+<p>Trong các phần sau, chúng ta sẽ đi qua hành trình của từng vai trò.</p>
+<p>Comet hoạt động tốt với cả SageMaker AI và Amazon SageMaker. SageMaker AI cung cấp môi trường phát triển tích hợp (IDE) Amazon SageMaker Studio, và SageMaker cung cấp IDE Amazon SageMaker Unified Studio. Trong bài đăng này, chúng tôi sử dụng SageMaker Studio.</p>
+<h3 id="hành-trình-của-quản-trị-viên">Hành trình của quản trị viên</h3>
+<p>Trong kịch bản này, quản trị viên nhận được yêu cầu từ một đội nhóm làm việc trên trường hợp sử dụng phát hiện gian lận để cung cấp một môi trường ML với thiết lập huấn luyện và thí nghiệm được quản lý hoàn toàn. Hành trình của quản trị viên bao gồm các bước sau:</p>
+<ol>
+<li>Thực hiện các điều kiện tiên quyết để <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/partner-app-onboard.html">thiết lập Ứng dụng AI Đối tác</a>. Điều này thiết lập quyền cho quản trị viên, cho phép Comet đảm nhận <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">vai trò thực thi SageMaker AI</a> thay mặt cho người dùng và các đặc quyền bổ sung để quản lý đăng ký Comet thông qua AWS Marketplace.</li>
+<li>Trên bảng điều khiển SageMaker AI, trong mục <strong>Ứng dụng và IDE</strong> trong bảng điều hướng, chọn <strong>Ứng dụng AI Đối tác</strong>, sau đó chọn <strong>Xem chi tiết</strong> cho Comet.
+<img src="/images/3-BlogsTranslated/blog-1-1.png" alt="">
+Các chi tiết được hiển thị, bao gồm mô hình định giá hợp đồng cho Comet và chi phí ước tính của cấp độ cơ sở hạ tầng.
+<img src="/images/3-BlogsTranslated/blog-1-2.png" alt="">
+Comet cung cấp các tùy chọn đăng ký khác nhau từ hợp đồng 1 tháng đến 36 tháng. Với hợp đồng này, người dùng có thể truy cập Comet trong SageMaker. Dựa trên số lượng người dùng, quản trị viên có thể xem xét và phân tích kích thước phiên bản phù hợp cho máy chủ bảng điều khiển Comet. Comet hỗ trợ từ 5–500 người dùng chạy hơn 100 công việc thí nghiệm.</li>
+<li>Chọn <strong>Đi đến Marketplace để đăng ký</strong> để được chuyển hướng đến danh sách Comet trên AWS Marketplace.</li>
+<li>Chọn <strong>Xem tùy chọn mua hàng</strong>.</li>
+</ol>
+<p>Trong biểu mẫu đăng ký, cung cấp các chi tiết cần thiết.</p>
+<p>Khi đăng ký hoàn tất, quản trị viên có thể bắt đầu cấu hình Comet.</p>
+<ol start="5">
+<li>Trong khi triển khai Comet, thêm trưởng nhóm dự án của đội nhóm trường hợp sử dụng phát hiện gian lận làm quản trị viên để quản lý các hoạt động quản trị cho bảng điều khiển Comet.</li>
+</ol>
+<p>Việc triển khai máy chủ Comet mất vài phút. Để biết thêm chi tiết về bước này, hãy tham khảo <a href="">Partner AI App provisioning</a>.</p>
+<ol start="6">
+<li>Thiết lập một miền SageMaker AI theo các bước trong <a href="">Use custom setup for Amazon SageMaker AI</a>. Theo thực hành tốt nhất, cung cấp một URL miền đã ký trước cho thành viên đội nhóm trường hợp sử dụng để truy cập trực tiếp vào giao diện người dùng Comet mà không cần đăng nhập vào bảng điều khiển SageMaker.</li>
+<li>Thêm các thành viên đội nhóm vào miền này và kích hoạt quyền truy cập vào Comet trong khi cấu hình miền.</li>
+</ol>
+<p>Bây giờ miền SageMaker AI đã sẵn sàng để người dùng đăng nhập và bắt đầu làm việc trên trường hợp sử dụng phát hiện gian lận.</p>
+<h3 id="hành-trình-của-người-dùng">Hành trình của người dùng</h3>
+<p>Bây giờ, hãy khám phá hành trình của một nhà thực hành ML từ trường hợp sử dụng phát hiện gian lận. Người dùng hoàn thành các bước sau:</p>
+<ol>
+<li>Đăng nhập vào miền SageMaker AI thông qua URL đã ký trước.</li>
+</ol>
+<p>Bạn sẽ được chuyển hướng đến IDE SageMaker Studio. Tên người dùng và vai trò thực thi AWS Identity and Access Management (IAM) của bạn được quản trị viên cấu hình sẵn.</p>
+<ol start="2">
+<li>Tạo một Không gian JupyterLab theo hướng dẫn người dùng JupyterLab.</li>
+<li>Bạn có thể bắt đầu làm việc trên trường hợp sử dụng phát hiện gian lận bằng cách khởi tạo một sổ Jupyter.</li>
+</ol>
+<p>Quản trị viên cũng đã thiết lập quyền truy cập cần thiết vào dữ liệu thông qua một thùng Amazon Simple Storage Service (Amazon S3).</p>
+<ol start="4">
+<li>Để truy cập API Comet, cài đặt thư viện <code>comet_ml</code> và cấu hình các biến môi trường cần thiết như mô tả trong <a href="">Set up the Amazon SageMaker Partner AI Apps SDKs</a>.</li>
+<li>Để truy cập giao diện người dùng Comet, chọn Ứng dụng AI Đối tác trong bảng điều hướng SageMaker Studio và chọn Mở cho Comet.</li>
+</ol>
+<p>Bây giờ, hãy cùng đi qua việc triển khai trường hợp sử dụng.</p>
+<h2 id="tổng-quan-về-giải-pháp">Tổng quan về giải pháp</h2>
+<p>Trường hợp sử dụng này làm nổi bật các thách thức doanh nghiệp phổ biến: làm việc với các tập dữ liệu không cân bằng (trong ví dụ này, chỉ 0,17% giao dịch là gian lận), yêu cầu nhiều lần lặp thí nghiệm, và duy trì khả năng tái tạo hoàn toàn để tuân thủ quy định. Để theo dõi, hãy tham khảo tài liệu Comet và Hướng dẫn Bắt đầu Nhanh để biết thêm chi tiết về cài đặt và API.</p>
+<p>Đối với trường hợp sử dụng này, chúng tôi sử dụng tập dữ liệu Phát hiện Gian lận Thẻ Tín dụng. Tập dữ liệu chứa các giao dịch thẻ tín dụng với nhãn nhị phân đại diện cho giao dịch gian lận (1) hoặc hợp pháp (0). Trong các phần sau, chúng tôi đi qua một số phần quan trọng của việc triển khai. Toàn bộ mã của việc triển khai có sẵn trong kho GitHub.</p>
+<h3 id="điều-kiện-tiên-quyết">Điều kiện tiên quyết</h3>
+<p>Là điều kiện tiên quyết, cấu hình các thư viện nhập cần thiết và các biến môi trường cho tích hợp Comet và SageMaker:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Comet ML để theo dõi thí nghiệm</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> comet_ml
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> comet_ml <span style="color:#f92672">import</span> Experiment, API, Artifact
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> comet_ml.integration.sagemaker <span style="color:#f92672">import</span> log_sagemaker_training_job_v1
+</span></span><span style="display:flex;"><span>AWS_PARTNER_APP_AUTH<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>AWS_PARTNER_APP_ARN<span style="color:#f92672">=&lt;</span>Your_AWS_PARTNER_APP_ARN<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>COMET_API_KEY<span style="color:#f92672">=&lt;</span>Your_Comet_API_Key<span style="color:#f92672">&gt;</span>  <span style="color:#75715e"># Từ Trang Chi tiết, nhấp vào Mở Comet. Ở góc trên bên phải, nhấp vào người dùng -&gt; Khóa API</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cấu hình Comet ML</span>
+</span></span><span style="display:flex;"><span>COMET_WORKSPACE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;your-comet-workspace-name&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>COMET_PROJECT_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;your-comet-project-name&gt;&#39;</span>
+</span></span></code></pre></div><h3 id="chuẩn-bị-tập-dữ-liệu">Chuẩn bị tập dữ liệu</h3>
+<p>Một trong những tính năng doanh nghiệp chính của Comet là phiên bản hóa tập dữ liệu tự động và theo dõi dòng dõi. Khả năng này cung cấp khả năng kiểm toán đầy đủ về dữ liệu nào được sử dụng để huấn luyện mỗi mô hình, điều này rất quan trọng để tuân thủ quy định và khả năng tái tạo. Bắt đầu bằng cách tải tập dữ liệu:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Tạo</span> <span style="color:#f92672">một</span> <span style="color:#f92672">Artifact</span> <span style="color:#f92672">Comet</span> <span style="color:#f92672">để</span> <span style="color:#f92672">theo</span> <span style="color:#f92672">dõi</span> <span style="color:#f92672">tập</span> <span style="color:#f92672">dữ</span> <span style="color:#f92672">liệu</span> <span style="color:#f92672">gốc</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset_artifact</span> <span style="color:#f92672">=</span> <span style="color:#f92672">Artifact</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fraud-dataset&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">artifact_type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dataset&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">aliases</span><span style="color:#f92672">=[</span><span style="color:#e6db74">&#34;raw&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Thêm</span> <span style="color:#f92672">tệp</span> <span style="color:#f92672">tập</span> <span style="color:#f92672">dữ</span> <span style="color:#f92672">liệu</span> <span style="color:#f92672">gốc</span> <span style="color:#f92672">vào</span> <span style="color:#f92672">artifact</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset_artifact</span>.<span style="color:#a6e22e">add_remote</span><span style="color:#f92672">(</span><span style="color:#f92672">s3_data_path</span><span style="color:#f92672">,</span> <span style="color:#f92672">metadata</span><span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&#34;dataset_stage&#34;:</span> <span style="color:#960050;background-color:#1e0010">&#34;raw&#34;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&#34;dataset_split&#34;:</span> <span style="color:#960050;background-color:#1e0010">&#34;not_split&#34;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&#34;preprocessing&#34;:</span> <span style="color:#960050;background-color:#1e0010">&#34;none&#34;</span>
+</span></span><span style="display:flex;"><span>}<span style="color:#f92672">)</span>
+</span></span></code></pre></div><h3 id="bắt-đầu-một-thí-nghiệm-comet">Bắt đầu một thí nghiệm Comet</h3>
+<p>Với artifact tập dữ liệu đã được tạo, bạn có thể bắt đầu theo dõi quy trình làm việc ML. Việc tạo một thí nghiệm Comet tự động bắt đầu ghi lại mã, thư viện đã cài đặt, siêu dữ liệu hệ thống, và các thông tin ngữ cảnh khác trong nền. Bạn có thể ghi lại artifact tập dữ liệu đã tạo trước đó trong thí nghiệm. Xem mã sau:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Tạo một thí nghiệm Comet mới
+</span></span><span style="display:flex;"><span>experiment_1 <span style="color:#f92672">=</span> comet_ml.<span style="color:#a6e22e">Experiment</span>(
+</span></span><span style="display:flex;"><span>    project_name<span style="color:#f92672">=</span>COMET_PROJECT_NAME,
+</span></span><span style="display:flex;"><span>    workspace<span style="color:#f92672">=</span>COMET_WORKSPACE,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Ghi lại artifact tập dữ liệu vào thí nghiệm này để theo dõi dòng dõi
+</span></span><span style="display:flex;"><span>experiment_1.<span style="color:#a6e22e">log_artifact</span>(dataset_artifact)
+</span></span></code></pre></div><h3 id="tiền-xử-lý-dữ-liệu">Tiền xử lý dữ liệu</h3>
+<p>Các bước tiếp theo là các bước tiền xử lý tiêu chuẩn, bao gồm loại bỏ các bản sao, bỏ các cột không cần thiết, chia thành các tập huấn luyện/xác thực/kiểm tra, và chuẩn hóa các đặc trưng bằng cách sử dụng <code>StandardScaler</code> của scikit-learn. Chúng tôi gói mã xử lý trong <code>preprocess.py</code> và chạy nó như một công việc Xử lý SageMaker. Xem mã sau:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Chạy</span> <span style="color:#f92672">công</span> <span style="color:#f92672">việc</span> <span style="color:#f92672">xử</span> <span style="color:#f92672">lý</span> <span style="color:#f92672">SageMaker</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">processor</span> <span style="color:#f92672">=</span> <span style="color:#f92672">SKLearnProcessor</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">framework_version</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;1.0-1&#39;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">role</span><span style="color:#f92672">=</span><span style="color:#f92672">sagemaker</span>.<span style="color:#a6e22e">get_execution_role</span><span style="color:#f92672">(),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">instance_count</span><span style="color:#f92672">=</span><span style="color:#f92672">1</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">instance_type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ml.t3.medium&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">processor</span>.<span style="color:#a6e22e">run</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">code</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;preprocess.py&#39;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">inputs</span><span style="color:#f92672">=[</span><span style="color:#f92672">ProcessingInput</span><span style="color:#f92672">(</span><span style="color:#f92672">source</span><span style="color:#f92672">=</span><span style="color:#f92672">s3_data_path</span><span style="color:#f92672">,</span> <span style="color:#f92672">destination</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/opt/ml/processing/input&#39;</span><span style="color:#f92672">)],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">outputs</span><span style="color:#f92672">=[</span><span style="color:#f92672">ProcessingOutput</span><span style="color:#f92672">(</span><span style="color:#f92672">source</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/opt/ml/processing/output&#39;</span><span style="color:#f92672">,</span> <span style="color:#f92672">destination</span><span style="color:#f92672">=</span><span style="color:#f92672">f</span><span style="color:#e6db74">&#39;s3://{bucket_name}/{processed_data_prefix}&#39;</span><span style="color:#f92672">)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>Sau khi bạn gửi công việc xử lý, SageMaker AI khởi động các phiên bản tính toán, xử lý và phân tích dữ liệu đầu vào, và giải phóng tài nguyên sau khi hoàn thành. Đầu ra của công việc xử lý được lưu trữ trong thùng S3 đã chỉ định.</p>
+<p>Tiếp theo, tạo một phiên bản mới của artifact tập dữ liệu để theo dõi dữ liệu đã được xử lý. Comet tự động phiên bản hóa các artifact có cùng tên, duy trì dòng dõi hoàn chỉnh từ dữ liệu gốc đến dữ liệu đã được xử lý.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Tạo</span> <span style="color:#f92672">một</span> <span style="color:#f92672">phiên</span> <span style="color:#f92672">bản</span> <span style="color:#f92672">cập</span> <span style="color:#f92672">nhật</span> <span style="color:#f92672">của</span> <span style="color:#f92672">Artifact</span> <span style="color:#e6db74">&#39;fraud-dataset&#39;</span> <span style="color:#f92672">cho</span> <span style="color:#f92672">dữ</span> <span style="color:#f92672">liệu</span> <span style="color:#f92672">đã</span> <span style="color:#f92672">được</span> <span style="color:#f92672">xử</span> <span style="color:#f92672">lý</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">preprocessed_dataset_artifact</span> <span style="color:#f92672">=</span> <span style="color:#f92672">Artifact</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fraud-dataset&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">artifact_type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dataset&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">aliases</span><span style="color:#f92672">=[</span><span style="color:#e6db74">&#34;preprocessed&#34;</span><span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span><span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">&#34;description&#34;:</span> <span style="color:#960050;background-color:#1e0010">&#34;Tập</span> <span style="color:#960050;background-color:#1e0010">dữ</span> <span style="color:#960050;background-color:#1e0010">liệu</span> <span style="color:#960050;background-color:#1e0010">phát</span> <span style="color:#960050;background-color:#1e0010">hiện</span> <span style="color:#960050;background-color:#1e0010">gian</span> <span style="color:#960050;background-color:#1e0010">lận</span> <span style="color:#960050;background-color:#1e0010">thẻ</span> <span style="color:#960050;background-color:#1e0010">tín</span> <span style="color:#960050;background-color:#1e0010">dụng&#34;,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">&#34;fraud_percentage&#34;:</span> <span style="color:#960050;background-color:#1e0010">f&#34;{</span>fraud_percentage:<span style="color:#ae81ff">.3</span>f}<span style="color:#f92672">%</span><span style="color:#e6db74">&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;</span><span style="color:#f92672">dataset_stage</span><span style="color:#e6db74">&#34;: &#34;</span><span style="color:#f92672">preprocessed</span><span style="color:#e6db74">&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;</span><span style="color:#f92672">preprocessing</span><span style="color:#e6db74">&#34;: &#34;</span><span style="color:#f92672">StandardScaler</span> <span style="color:#f92672">+</span> <span style="color:#f92672">chia</span> <span style="color:#f92672">train</span><span style="color:#f92672">/</span><span style="color:#f92672">val</span><span style="color:#f92672">/</span><span style="color:#f92672">test</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Thêm</span> <span style="color:#f92672">các</span> <span style="color:#f92672">tệp</span> <span style="color:#f92672">tập</span> <span style="color:#f92672">dữ</span> <span style="color:#f92672">liệu</span> <span style="color:#f92672">huấn</span> <span style="color:#f92672">luyện</span><span style="color:#f92672">,</span> <span style="color:#f92672">xác</span> <span style="color:#f92672">thực</span><span style="color:#f92672">,</span> <span style="color:#f92672">và</span> <span style="color:#f92672">kiểm</span> <span style="color:#f92672">tra</span> <span style="color:#f92672">làm</span> <span style="color:#f92672">tài</span> <span style="color:#f92672">sản</span> <span style="color:#f92672">từ</span> <span style="color:#f92672">xa</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">preprocessed_dataset_artifact</span>.<span style="color:#a6e22e">add_remote</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">uri</span><span style="color:#f92672">=</span><span style="color:#f92672">f</span><span style="color:#e6db74">&#39;s3://{bucket_name}/{processed_data_prefix}&#39;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">logical_path</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;split_data&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Ghi</span> <span style="color:#f92672">lại</span> <span style="color:#f92672">tập</span> <span style="color:#f92672">dữ</span> <span style="color:#f92672">liệu</span> <span style="color:#f92672">đã</span> <span style="color:#f92672">cập</span> <span style="color:#f92672">nhật</span> <span style="color:#f92672">vào</span> <span style="color:#f92672">thí</span> <span style="color:#f92672">nghiệm</span> <span style="color:#f92672">để</span> <span style="color:#f92672">theo</span> <span style="color:#f92672">dõi</span> <span style="color:#f92672">các</span> <span style="color:#f92672">cập</span> <span style="color:#f92672">nhật</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">experiment_1</span>.<span style="color:#a6e22e">log_artifact</span><span style="color:#f92672">(</span><span style="color:#f92672">preprocessed_dataset_artifact</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><h3 id="quy-trình-thí-nghiệm-comet-và-sagemaker-ai">Quy trình thí nghiệm Comet và SageMaker AI</h3>
+<p>Các nhà khoa học dữ liệu thích thí nghiệm nhanh; do đó, chúng tôi tổ chức quy trình làm việc thành các hàm tiện ích có thể tái sử dụng, có thể được gọi nhiều lần với các siêu tham số khác nhau trong khi duy trì ghi log và đánh giá nhất quán qua tất cả các lần chạy. Trong phần này, chúng tôi giới thiệu các hàm tiện ích cùng với một đoạn mã ngắn bên trong hàm:</p>
+<ul>
+<li><strong>train()</strong> – Khởi tạo một công việc huấn luyện mô hình SageMaker bằng thuật toán XGBoost tích hợp sẵn của SageMaker:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Tạo</span> <span style="color:#f92672">bộ</span> <span style="color:#f92672">ước</span> <span style="color:#f92672">lượng</span> <span style="color:#f92672">SageMaker</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">estimator</span> <span style="color:#f92672">=</span> <span style="color:#f92672">Estimator</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image_uri</span><span style="color:#f92672">=</span><span style="color:#f92672">xgboost_image</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">role</span><span style="color:#f92672">=</span><span style="color:#f92672">execution_role</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">instance_count</span><span style="color:#f92672">=</span><span style="color:#f92672">1</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">instance_type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ml.m5.large&#39;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">output_path</span><span style="color:#f92672">=</span><span style="color:#f92672">model_output_path</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">sagemaker_session</span><span style="color:#f92672">=</span><span style="color:#f92672">sagemaker_session_obj</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hyperparameters</span><span style="color:#f92672">=</span><span style="color:#f92672">hyperparameters_dict</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">max_run</span><span style="color:#f92672">=</span><span style="color:#f92672">1800</span>  <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Thời</span> <span style="color:#f92672">gian</span> <span style="color:#f92672">huấn</span> <span style="color:#f92672">luyện</span> <span style="color:#f92672">tối</span> <span style="color:#f92672">đa</span> <span style="color:#f92672">tính</span> <span style="color:#f92672">bằng</span> <span style="color:#f92672">giây</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Bắt</span> <span style="color:#f92672">đầu</span> <span style="color:#f92672">huấn</span> <span style="color:#f92672">luyện</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">estimator</span>.<span style="color:#a6e22e">fit</span><span style="color:#f92672">(</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&#39;train&#39;:</span> <span style="color:#960050;background-color:#1e0010">train_channel,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&#39;validation&#39;:</span> <span style="color:#960050;background-color:#1e0010">val_channel</span>
+</span></span><span style="display:flex;"><span>}<span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>log_training_job()</strong> – Ghi lại siêu dữ liệu và số liệu huấn luyện và liên kết tài sản mô hình với thí nghiệm để đảm bảo khả năng truy xuất nguồn gốc hoàn chỉnh:</li>
+</ul>
+<pre tabindex="0"><code class="language-code" data-lang="code"># Ghi lại công việc huấn luyện SageMaker vào Comet
+log_sagemaker_training_job_v1(
+    estimator=training_estimator,
+    experiment=api_experiment
+)
+</code></pre><ul>
+<li><strong>log_model_to_comet()</strong> – Liên kết các artifact mô hình với Comet, ghi lại siêu dữ liệu huấn luyện, và liên kết tài sản mô hình với thí nghiệm để đảm bảo khả năng truy xuất nguồn gốc hoàn chỉnh:</li>
+</ul>
+<pre tabindex="0"><code class="language-code" data-lang="code">experiment.log_remote_model(
+    model_name=model_name,
+    uri=model_artifact_path,
+    metadata=metadata
+)
+</code></pre><ul>
+<li><strong>deploy_and_evaluate_model()</strong> – Thực hiện triển khai và đánh giá mô hình, và ghi log số liệu:</li>
+</ul>
+<pre tabindex="0"><code class="language-code" data-lang="code"># Triển khai đến điểm cuối
+predictor = estimator.deploy(
+    initial_instance_count=1,
+    instance_type=&#34;ml.m5.xlarge&#34;)
+# Ghi lại số liệu và hình ảnh hóa vào Comet
+experiment.log_metrics(metrics)
+experiment.log_confusion_matrix(matrix=cm, labels=[&#39;Normal&#39;, &#39;Fraud&#39;])
+# Ghi lại đường cong ROC
+fpr, tpr, _ = roc_curve(y_test, y_pred_prob_as_np_array)
+experiment.log_curve(&#34;roc_curve&#34;, x=fpr, y=tpr)
+</code></pre><p>Mã dự đoán và đánh giá hoàn chỉnh có sẵn trong kho GitHub.</p>
+<h3 id="chạy-các-thí-nghiệm">Chạy các thí nghiệm</h3>
+<p>Bây giờ bạn có thể chạy nhiều thí nghiệm bằng cách gọi các hàm tiện ích với các cấu hình khác nhau và so sánh các thí nghiệm để tìm ra cài đặt tối ưu nhất cho trường hợp sử dụng phát hiện gian lận.</p>
+<p>Đối với thí nghiệm đầu tiên, chúng tôi thiết lập một đường cơ sở bằng cách sử dụng các siêu tham số XGBoost tiêu chuẩn:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Xác</span> <span style="color:#f92672">định</span> <span style="color:#f92672">siêu</span> <span style="color:#f92672">tham</span> <span style="color:#f92672">số</span> <span style="color:#f92672">cho</span> <span style="color:#f92672">thí</span> <span style="color:#f92672">nghiệm</span> <span style="color:#f92672">đầu</span> <span style="color:#f92672">tiên</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">hyperparameters_v1</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">&#39;objective&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>binary:logistic<span style="color:#e6db74">&#39;,  # Phân loại nhị phân
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;</span>num_round<span style="color:#e6db74">&#39;: 100,               # Số vòng tăng cường
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;</span>eval_metric<span style="color:#e6db74">&#39;: &#39;</span>auc<span style="color:#e6db74">&#39;,           # Số liệu đánh giá
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;</span>learning_rate<span style="color:#e6db74">&#39;: 0.15,          # Tỷ lệ học
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;</span>booster<span style="color:#e6db74">&#39;: &#39;</span>gbtree<span style="color:#960050;background-color:#1e0010">&#39;</span>             <span style="color:#960050;background-color:#1e0010">#</span> Thuật toán tăng cường
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Huấn</span> <span style="color:#f92672">luyện</span> <span style="color:#f92672">mô</span> <span style="color:#f92672">hình</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">estimator_1</span> <span style="color:#f92672">=</span> <span style="color:#f92672">train</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">model_output_path</span><span style="color:#f92672">=</span><span style="color:#f92672">f</span><span style="color:#e6db74">&#34;s3://{bucket_name}/{model_output_prefix}/1&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">execution_role</span><span style="color:#f92672">=</span><span style="color:#f92672">role</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">sagemaker_session_obj</span><span style="color:#f92672">=</span><span style="color:#f92672">sagemaker_session</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hyperparameters_dict</span><span style="color:#f92672">=</span><span style="color:#f92672">hyperparameters_v1</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">train_channel_loc</span><span style="color:#f92672">=</span><span style="color:#f92672">train_channel_location</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">val_channel_loc</span><span style="color:#f92672">=</span><span style="color:#f92672">validation_channel_location</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Ghi</span> <span style="color:#f92672">lại</span> <span style="color:#f92672">công</span> <span style="color:#f92672">việc</span> <span style="color:#f92672">huấn</span> <span style="color:#f92672">luyện</span> <span style="color:#f92672">và</span> <span style="color:#f92672">artifact</span> <span style="color:#f92672">mô</span> <span style="color:#f92672">hình</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">log_training_job</span><span style="color:#f92672">(</span><span style="color:#f92672">experiment_key</span><span style="color:#f92672">=</span><span style="color:#f92672">experiment_1</span>.<span style="color:#a6e22e">get_key</span><span style="color:#f92672">(),</span> <span style="color:#f92672">training_estimator</span><span style="color:#f92672">=</span><span style="color:#f92672">estimator_1</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">log_model_to_comet</span><span style="color:#f92672">(</span><span style="color:#f92672">experiment</span><span style="color:#f92672">=</span><span style="color:#f92672">experiment_1</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#f92672">model_name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fraud-detection-xgb-v1&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#f92672">model_artifact_path</span><span style="color:#f92672">=</span><span style="color:#f92672">estimator_1</span>.<span style="color:#a6e22e">model_data</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                   <span style="color:#f92672">metadata</span><span style="color:#f92672">=</span><span style="color:#f92672">metadata</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#f92672">Triển</span> <span style="color:#f92672">khai</span> <span style="color:#f92672">và</span> <span style="color:#f92672">đánh</span> <span style="color:#f92672">giá</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">deploy_and_evaluate_model</span><span style="color:#f92672">(</span><span style="color:#f92672">experiment</span><span style="color:#f92672">=</span><span style="color:#f92672">experiment_1</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                         <span style="color:#f92672">estimator</span><span style="color:#f92672">=</span><span style="color:#f92672">estimator_1</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                         <span style="color:#f92672">X_test_scaled</span><span style="color:#f92672">=</span><span style="color:#f92672">X_test_scaled</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                         <span style="color:#f92672">y_test</span><span style="color:#f92672">=</span><span style="color:#f92672">y_test</span>
+</span></span><span style="display:flex;"><span>                         <span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>Trong khi chạy một thí nghiệm Comet từ một sổ Jupyter, chúng ta cần kết thúc thí nghiệm để đảm bảo mọi thứ được ghi lại và lưu trữ trong máy chủ Comet. Xem mã sau: <code>experiment_1.end()</code></p>
+<p>Khi thí nghiệm cơ sở hoàn tất, bạn có thể chạy các thí nghiệm bổ sung với các siêu tham số khác nhau. Kiểm tra sổ để xem chi tiết của cả hai thí nghiệm.</p>
+<p>Khi thí nghiệm thứ hai hoàn tất, điều hướng đến giao diện người dùng Comet để so sánh hai lần chạy thí nghiệm này.</p>
+<h3 id="xem-các-thí-nghiệm-comet-trong-giao-diện-người-dùng">Xem các thí nghiệm Comet trong giao diện người dùng</h3>
+<p>Để truy cập giao diện người dùng, bạn có thể tìm URL trong IDE SageMaker Studio hoặc bằng cách thực thi mã được cung cấp trong sổ: <code>experiment_2.url</code></p>
+<p>Ảnh chụp màn hình sau đây cho thấy giao diện người dùng thí nghiệm Comet. Các chi tiết thí nghiệm chỉ nhằm mục đích minh họa và không đại diện cho một thí nghiệm phát hiện gian lận thực tế.</p>
+<p>Điều này kết thúc thí nghiệm phát hiện gian lận.</p>
+<h3 id="dọn-dẹp">Dọn dẹp</h3>
+<p>Đối với phần thí nghiệm, cơ sở hạ tầng xử lý và huấn luyện SageMaker mang tính tạm thời và tự động tắt khi công việc hoàn tất. Tuy nhiên, bạn vẫn phải dọn dẹp thủ công một vài tài nguyên để tránh chi phí không cần thiết:</p>
+<ol>
+<li>Tắt Không gian JupyterLab SageMaker sau khi sử dụng. Để biết hướng dẫn, hãy tham khảo <a href="">Idle shutdown</a>.</li>
+<li>Đăng ký Comet gia hạn dựa trên hợp đồng đã chọn. Hủy hợp đồng khi không còn yêu cầu gia hạn đăng ký Comet.</li>
+</ol>
+<h2 id="lợi-ích-của-tích-hợp-sagemaker-và-comet">Lợi ích của tích hợp SageMaker và Comet</h2>
+<p>Sau khi đã thể hiện quy trình làm việc kỹ thuật, hãy xem xét các lợi ích rộng lớn hơn mà tích hợp này mang lại.</p>
+<h3 id="phát-triển-mô-hình-được-đơn-giản-hóa">Phát triển mô hình được đơn giản hóa</h3>
+<p>Sự kết hợp giữa Comet và SageMaker giảm thiểu chi phí thủ công khi chạy các thí nghiệm ML. Trong khi SageMaker xử lý việc cung cấp và mở rộng cơ sở hạ tầng, việc ghi log tự động của Comet ghi lại các siêu tham số, số liệu, mã, thư viện đã cài đặt, và hiệu suất hệ thống từ các công việc huấn luyện của bạn mà không cần cấu hình bổ sung. Điều này giúp các đội nhóm tập trung vào phát triển mô hình thay vì quản lý sổ sách thí nghiệm. Khả năng hình ảnh hóa của Comet vượt xa các biểu đồ số liệu cơ bản. Các biểu đồ tích hợp cho phép so sánh thí nghiệm nhanh chóng, và các bảng Python tùy chỉnh hỗ trợ các công cụ phân tích đặc thù cho lĩnh vực để gỡ lỗi hành vi mô hình, tối ưu hóa siêu tham số, hoặc tạo các hình ảnh hóa chuyên biệt mà các công cụ tiêu chuẩn không thể cung cấp.</p>
+<h3 id="hợp-tác-và-quản-trị-doanh-nghiệp">Hợp tác và quản trị doanh nghiệp</h3>
+<p>Đối với các đội nhóm doanh nghiệp, sự kết hợp này tạo ra một nền tảng trưởng thành để mở rộng các dự án ML trong các môi trường được quy định. SageMaker cung cấp các môi trường ML nhất quán, an toàn, và Comet cho phép cộng tác liền mạch với việc theo dõi dòng dõi artifact và mô hình hoàn chỉnh. Điều này giúp tránh các sai lầm tốn kém xảy ra khi các đội nhóm không thể tái tạo lại các kết quả trước đó.</p>
+<h3 id="tích-hợp-vòng-đời-ml-hoàn-chỉnh">Tích hợp vòng đời ML hoàn chỉnh</h3>
+<p>Không giống như các giải pháp điểm chỉ giải quyết việc huấn luyện hoặc giám sát, Comet kết hợp với SageMaker hỗ trợ vòng đời ML hoàn chỉnh của bạn. Các mô hình có thể được đăng ký trong sổ đăng ký mô hình của Comet với việc theo dõi phiên bản đầy đủ và quản trị. SageMaker xử lý triển khai mô hình, và Comet duy trì dòng dõi và quy trình phê duyệt để thăng cấp mô hình. Khả năng giám sát sản xuất của Comet theo dõi hiệu suất mô hình và sự trôi dạt dữ liệu sau khi triển khai, tạo ra một vòng lặp khép kín nơi các thông tin chi tiết từ sản xuất thông báo cho vòng thí nghiệm SageMaker tiếp theo của bạn.</p>
+<h2 id="kết-luận">Kết luận</h2>
+<p>Trong bài đăng này, chúng tôi đã thể hiện cách sử dụng SageMaker và Comet cùng nhau để khởi tạo các môi trường ML được quản lý hoàn toàn với khả năng tái tạo và theo dõi thí nghiệm.</p>
+<p>Để nâng cao quy trình làm việc SageMaker của bạn với khả năng quản lý thí nghiệm toàn diện, triển khai Comet trực tiếp trong môi trường SageMaker của bạn thông qua AWS Marketplace, và chia sẻ phản hồi của bạn trong phần bình luận.</p>
+<p>Để biết thêm thông tin về các dịch vụ và tính năng được thảo luận trong bài đăng này, hãy tham khảo các tài nguyên sau:</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/partner-app-onboard.html">Thiết lập Ứng dụng AI Đối tác</a></li>
+<li><a href="https://www.comet.com/docs/v2/guides/quickstart/">Khởi động nhanh với Comet</a></li>
+<li><a href="https://github.com/aws-samples/generative-ai-on-amazon-sagemaker/tree/main/workshops/partner-ai-apps-with-sagemakerai/comet/Fraud%20Detection">Sổ trên GitHub</a></li>
+<li><a href="https://www.comet.com/docs/v2/">Tài liệu Comet</a></li>
+<li><a href="https://github.com/comet-ml/opik">Nền tảng mã nguồn mở Opik để quan sát LLM</a></li>
+</ul>
+<h2 id="về-các-tác-giả">Về các tác giả</h2>
+<p><strong>Vikesh Pandey</strong> là một Kiến trúc sư Giải pháp Chuyên gia GenAI/ML tại AWS, giúp các tổ chức tài chính lớn áp dụng và mở rộng khối lượng công việc GenAI và ML. Ông là tác giả của cuốn sách “Generative AI for financial services.” Ông có hơn 15 năm kinh nghiệm xây dựng các ứng dụng cấp doanh nghiệp trên GenAI/ML và các công nghệ liên quan. Trong thời gian rảnh rỗi, ông chơi một môn thể thao không tên với con trai mình, nằm giữa bóng đá và bóng bầu dục.</p>
+<p><strong>Naufal Mir</strong> là một Kiến trúc sư Giải pháp Chuyên gia GenAI/ML tại AWS. Ông tập trung vào việc giúp khách hàng xây dựng, huấn luyện, triển khai và di chuyển khối lượng công việc học máy sang SageMaker. Trước đây, ông làm việc tại các tổ chức tài chính phát triển và vận hành các hệ thống quy mô lớn. Ngoài công việc, ông thích chạy bộ và đạp xe đường dài.</p>
+<p><strong>Sarah Ostermeier</strong> là Quản lý Tiếp thị Sản phẩm Kỹ thuật tại Comet. Bà chuyên đưa các sản phẩm dành cho nhà phát triển GenAI và ML của Comet đến với các kỹ sư cần chúng thông qua nội dung kỹ thuật, tài nguyên giáo dục, và thông điệp sản phẩm. Trước đây, bà đã làm việc với tư cách là kỹ sư ML, nhà khoa học dữ liệu, và quản lý thành công khách hàng, giúp khách hàng triển khai và mở rộng các giải pháp AI. Ngoài công việc, bà thích đi du lịch ngoài lề, viết về AI, và đọc khoa học viễn tưởng.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/workshop-template/vi/3-blogstranslated/3.6-blog6/" title="Blog 6"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/workshop-template/vi/4-eventparticipated/" title="Các events đã tham gia" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/workshop-template/js/clipboard.min.js?1760185972"></script>
+    <script src="/workshop-template/js/perfect-scrollbar.min.js?1760185972"></script>
+    <script src="/workshop-template/js/perfect-scrollbar.jquery.min.js?1760185972"></script>
+    <script src="/workshop-template/js/jquery.sticky.js?1760185972"></script>
+    <script src="/workshop-template/js/featherlight.min.js?1760185972"></script>
+    <script src="/workshop-template/js/highlight.pack.js?1760185972"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/workshop-template/js/modernizr.custom-3.6.0.js?1760185972"></script>
+    <script src="/workshop-template/js/learn.js?1760185972"></script>
+    <script src="/workshop-template/js/hugo-learn.js?1760185972"></script>
+
+    <link href="/workshop-template/mermaid/mermaid.css?1760185972" rel="stylesheet" />
+    <script src="/workshop-template/mermaid/mermaid.js?1760185972"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function (i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    ((i[r] =
+      i[r] ||
+      function () {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date()));
+    ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "https://www.google-analytics.com/analytics.js",
+    "ga",
+  );
+
+  ga("create", "UA-158079754-2", "auto");
+  ga("send", "pageview");
+</script>
+
+  </body>
+</html>
