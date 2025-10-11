@@ -1,115 +1,127 @@
 ---
 title: "Proposal"
-date: "2025-09-09"
+date: "2025-10-02"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
-
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+# Personalized Food Ingredient Sales Platform
 
 ### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+The Personalized Food Ingredient Sales Platform focuses on enabling faster and more efficient ingredient shopping by providing fresh ingredients alongside customized recipes. Users register accounts to access a diverse recipe database, receive AI-driven meal suggestions based on purchase history and preferences, and order ingredients with doorstep delivery. The system allows portion customization and precise calorie/macro calculations for convenience. Leveraging AWS cloud infrastructure, the platform ensures flexible scalability, high performance, and secure management.
 
 ### 2. Problem Statement
 ### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
+Customers face challenges in efficiently sourcing ingredients for meal preparation, often spending significant time searching for supplies that match recipes. Existing platforms offer recipe and menu suggestions but lack integrated ingredient purchasing, requiring users to source supplies independently, which is time-consuming and prone to errors in portioning.
 
 ### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+The platform employs Spring Boot for a robust REST API backend handling user registration, recipe management, shopping cart, and order processing, with React delivering a user-friendly frontend featuring AI-driven meal recommendations. Data is stored in AWS RDS (PostgreSQL), images and static assets in Amazon S3, with the backend deployed on Amazon EC2 within a secure VPC, and Route 53 managing the domain. Users can customize portions, receive personalized recipe suggestions, and order ingredients for delivery. Key features include a diverse recipe library, accurate calorie calculations, and low operational costs.
 
 ### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+The solution establishes a comprehensive platform for the nutrition startup to expand services while collecting user data for enhanced recommendation systems. It eliminates manual calorie calculations and fragmented shopping through an integrated system, simplifying nutrition planning and driving revenue from ingredient sales. Estimated monthly costs are $21.13 (per AWS Pricing Calculator), totaling approximately $253.56 for 12 months. Development leverages open-source frameworks, incurring no additional hardware costs. ROI is expected within 6–12 months through user time savings and consistent order revenue.
 
 ### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
+The platform leverages a VPC-based AWS architecture to host a scalable web application. The front-end components run in a public subnet and connect securely to back-end services within private subnets. Traffic from the internet flows through an Internet Gateway (IGW) to the front-end instances, which interact with back-end instances for business logic and data processing. The database resides in a private subnet for enhanced security and isolation. Route 53 manages DNS routing, while an S3 bucket provides application storage accessible through VPC endpoints. IAM controls access permissions, and CI/CD pipelines are orchestrated using AWS CodeBuild and CodePipeline to automate deployments.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
-
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+![Architecture](/images/2-Proposal/architecture.png)
 
 ### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+- **Amazon VPC**: Provides an isolated network with public and private subnets across one Availability Zone.
+- **Amazon EC2**: Hosts front-end and back-end application servers.
+- **Amazon RDS**: Managed relational database service in a private subnet.
+- **Amazon S3**: Used as application storage for assets and data backups.
+- **VPC Endpoint**: Enables private connection from EC2 instances to S3 without Internet access.
+- **Amazon Route 53**: Manages domain name resolution for external access.
+- **AWS CodeBuild & CodePipeline**: Automate build and deployment processes from GitHub to EC2.
+- **AWS IAM**: Manages secure user access and permissions.
 
 ### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+- **Networking**: The architecture runs within a single VPC containing one public and two private subnets.
 
-### 4. Technical Implementation
+- **Front-End Layer**: EC2 instance in the public subnet handles web traffic via the IGW, registered with Route 53.
+
+- **Back-End Layer**: EC2 instance in the private subnet processes requests from the front-end and communicates with the database.
+
+- **Data Layer**: RDS instance resides in a private subnet for persistent data storage.
+
+- **Storage Layer**: Application data and files are stored in Amazon S3, accessible through the VPC Endpoint.
+
+- **CI/CD Pipeline**: CodePipeline and CodeBuild pull code from GitHub, build, and deploy updates to the respective EC2 instances.
+
+- **Security & Access Control**: IAM roles and policies manage user permissions, ensuring only authorized services can access resources.
+
+## 4. Technical Implementation
+
 **Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
+This project has two parts—developing Spring Boot back-end and React frontend and deploy the website to AWS using AWS services each following 4 phases.
+- **Build Theory and Draw Architecture:** Gather requirements for the web application, design system architecture (Spring Boot REST API + React front-end), and define the database schema (Month 1).
+- **Develop, Test:** Implement the Spring Boot backend with REST APIs (authentication, user management, meal/recipe CRUD, shopping cart, etc.), and build the React frontend (UI/UX, routing, forms, state management). Conduct unit tests for backend services, integration tests for API endpoints, and frontend tests (Jest/React Testing Library). (Month 1–2)
+- **Calculate Price and Check Practicality:** Use AWS Pricing Calculator to estimate costs for EC2 (backend hosting), RDS (database), S3 (static files and images), VPC (network), Route53 (domain) then adjust if needed (Month 2).
+- **AWS Integration:** Integrate AWS services into the application. Deploy the website on **EC2**, store pictures on **S3**, configure **RDS** for database, using **VPC** for managing network, **Route53** for domain, and set up CI/CD pipelines (GitHub Actions or AWS CodePipeline). Perform staging tests before final production release. (Month 3)
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
 
-### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+### Technical Requirements
 
-### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+- **Back-end (Spring Boot):** REST API for authentication, user management, meal/recipe CRUD, shopping cart, and order processing. Includes security (JWT, Spring Security), validation, and integration with AWS RDS.
+- **Front-end (React):** Responsive web application with user-friendly UI/UX, routing (React Router), state management (Redux or Context API), and API integration with the Spring Boot backend.
+- **Database (AWS RDS):** Relational database (MySQL/PostgreSQL) to store users, recipes, shopping cart, and order data.
+- **Storage (AWS S3):** Used for hosting static React build files and storing user-uploaded images (e.g., recipe pictures, profile images).
+- **Hosting & Networking (AWS EC2 & AWS VPC):** Spring Boot backend deployed on EC2 instances, secured and isolated within a VPC for networking and access control.
+- **Domain Management (AWS Route 53):** Custom domain configuration and DNS management for the website.
+- **CI/CD (GitHub Actions or AWS CodePipeline):** Automated build, test, and deployment pipeline for both back-end and front-end.
+- **Testing Tools:** JUnit/Mockito for backend unit and integration tests, Jest/React Testing Library for front-end testing, Postman for API testing.
+- **Authentication & Security:** JWT authentication and HTTPS configuration; optional AWS Cognito for managing user access.
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+---
 
-Total: $0.7/month, $8.40/12 months
+## 5. Timeline & Milestones
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+### Project Timeline
 
-### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+- **Pre-Project (Month 1):** Team formation, role assignment (backend, frontend, AWS deployment), requirement gathering, and drafting the initial system architecture.
+- **Project Execution (Months 1–3):**
+  - **Month 1:** Build theory and draw architecture (Spring Boot backend + React frontend design, database schema). Begin initial development of backend and frontend.
+  - **Month 2:** Continue backend and frontend development, perform unit and integration testing. Use AWS Pricing Calculator to evaluate hosting costs and refine architecture for cost-effectiveness.
+  - **Month 3:** Integrate AWS services (EC2, RDS, S3, VPC, Route 53), configure CI/CD pipelines, conduct staging tests, and deploy the website to production.
+- **Post-Launch:** Up to 3 months for maintenance, optimization, and feature enhancements (e.g., scaling backend, improving UI/UX, adding new features).
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+## 6. Budget Estimation
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+- AWS Service:
+  - VPC: $0.00/month (no cost for subnets, route tables, security groups)
+  - EC2: ≈$7.60/month (shared instances, Linux, constant usage, t4g.micro, 360 hours, 20 GB gp3)
+  - Route 53: $1.10/month (1 hosted zone, <1M DNS queries, 1 DNS Firewall)
+  - S3 Standard: ≈$0.33/month (10 GB, ~5000 requests, outbound data transfer)
+  - RDS: ≈$12.00/month (db.t4.micro, 20 GB storage, PostgreSQL, 360 hours, no performance insight)
+  - CodeBuild: ≈$0.10/month (3 of build in a month, 10 minutes duration, arm1.small, Linux)
+  - CodePipeline: $0.00/month (40 free action, free tier)
 
-### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+Total: ≈$21.13/month (excluding outbound data transfer), ≈253.56/12 months
+
+## 7. Risk Assessment
+
+*Risk Matrix*
+- EC2 and RDS downtime: Medium impact, medium probability
+- Database bottlenecks: Medium impact, during peak traffic
+- Cost overruns: High impact, very low probability
+- Security threats: High impact, low probability
+
+*Mitigation Strategies*
+- Enable Auto Scaling for EC2 instances.
+- Set up AWS Budget Alerts to monitor and control spending.
+- Implement IAM roles, Security Groups, and AWS WAF for enhanced security.
+
+### Contingency Plans
+- Failover & Recovery: Promote RDS read replica or restore snapshot; redeploy EC2 from AMI.
+
+## 8. Expected Outcomes
+
+*Technical Improvements*
+- CI/CD pipeline + Infrastructure as Code for reliable deployment and rollback.
+- Monitoring and alerts with CloudWatch for system health.
+
+*Long-term Value*
+- Collect user preference data to build recommendation systems for personalized meal suggestions.
+- Scale infrastructure to support thousands of users.
+- Potential integration with delivery services.

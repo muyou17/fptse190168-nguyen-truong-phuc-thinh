@@ -35,8 +35,8 @@ pre: " <b> 1.3. </b> "
   * Quản lý sản phẩm
   * Quản lý đơn hàng
   * Bảng tổng quan
-* Đánh giá tiến độ dự án cùng nhóm, phân công các nhiệm vụ mới.
 * Tìm hiểu về container hóa thông qua khóa học “Giới thiệu về Container với Docker, Kubernetes và OpenShift” trên Coursera, bao gồm:
   * Kiến thức cơ bản về Docker
   * Quản lý và điều phối với Kubernetes
-  * Các nguyên tắc cơ bản của OpenShift
+  * Căn bản của OpenShift
+* Đánh giá tiến độ dự án cùng nhóm, phân công các nhiệm vụ mới.

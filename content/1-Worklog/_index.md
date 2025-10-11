@@ -9,13 +9,13 @@ pre: " <b> 1. </b> "
 
 **Week 1:** [Getting familiar basic AWS services, team members and deciding on the first project.](1.1-week1/)
 
-**Week 2:** [Doing task A...](1.2-week2/)
+**Week 2:** [Gain in-depth knowledge of natural language processing (NLP). Collaborate with team to define features and assign project tasks.](1.2-week2/)
 
-**Week 3:** [Doing task B...](1.3-week3/)
+**Week 3:** [Learn React.js and applying the knowledge to develop the product management page. Study containerization to prepare for deployment.](1.3-week3/)
 
-**Week 4:** [Doing task C...](1.4-week4/)
+**Week 4:** [Focus on developing management pages for the seller panel.](1.4-week4/)
 
-**Week 5:** [Doing task D...](1.5-week5/)
+**Week 5:** [Completing the seller panel. Translate three technical blogs.](1.5-week5/)
 
 **Week 6:** [Doing task E...](1.6-week6/)
 
