@@ -1,6 +1,5 @@
 baseURL = "https://thienluhoan.github.io/workshop-template/"
-relativeURLs = true
-canonifyURLs = true
+defaultContentLanguage = "en"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
@@ -19,7 +18,7 @@ home = [ "HTML", "RSS", "JSON"]
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false
-  
+
 [Languages]
 [Languages.en]
 title = "Internship Report"
