@@ -1,6 +1,6 @@
 ---
-title: "Worklog Tuần 11"
-date: "2025-09-09"
+title: "Nhật ký công việc Tuần 11"
+date: "2025-11-17"
 weight: 2
 chapter: false
 pre: " <b> 1.11. </b> "
@@ -10,47 +10,17 @@ pre: " <b> 1.11. </b> "
 ### Mục tiêu tuần 11:
 
 * Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+
 
 ### Các nhiệm vụ cần triển khai trong tuần này:
+
 | Thứ | Nhiệm vụ | Ngày | Nguồn tài liệu |
 | --- | -------- | ---- | -------------- |
-| 2 | | 15/09/2025 | |
-| 3 | | 16/09/2025 | |
-| 4 | | 17/09/2025 | |
-| 5 | | 18/09/2025 | |
-| 6 | | 19/09/2025 | |
+| 2 | - Hoàn thành quá trình xử lý dữ liệu. | 17/11/2025 | |
+| 3 | - Bắt đầu làm mô hình đề xuất bằng TensorFlow Recommenders. | 18/11/2025 | |
+| 4 | - Hoàn thiện kiến trúc của mô hình. | 19/11/2025 | |
+| 5 | - Tinh chỉnh thông số của mô hình. | 20/11/2025 | |
+| 6 | - Hoàn tất quá trình huấn luyện và lưu mô hình. | 21/11/2025 | |
 
 
 ### Kết quả đạt được tuần 11:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

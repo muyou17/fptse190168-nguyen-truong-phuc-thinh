@@ -7,51 +7,54 @@ pre: " <b> 2. </b> "
 ---
 
 # Personalized Food Ingredient Sales Platform
-
+## Ingredient Shopping with AI-Powered Recipe Recommendations for Smarter Home Cooking
 ### 1. Executive Summary
 The Personalized Food Ingredient Sales Platform focuses on enabling faster and more efficient ingredient shopping by providing fresh ingredients alongside customized recipes. Users register accounts to access a diverse recipe database, receive AI-driven meal suggestions based on purchase history and preferences, and order ingredients with doorstep delivery. The system allows portion customization and precise calorie/macro calculations for convenience. Leveraging AWS cloud infrastructure, the platform ensures flexible scalability, high performance, and secure management.
 
 ### 2. Problem Statement
-### What’s the Problem?
+#### What’s the Problem?
 Customers face challenges in efficiently sourcing ingredients for meal preparation, often spending significant time searching for supplies that match recipes. Existing platforms offer recipe and menu suggestions but lack integrated ingredient purchasing, requiring users to source supplies independently, which is time-consuming and prone to errors in portioning.
 
-### The Solution
-The platform employs Spring Boot for a robust REST API backend handling user registration, recipe management, shopping cart, and order processing, with React delivering a user-friendly frontend featuring AI-driven meal recommendations. Data is stored in AWS RDS (PostgreSQL), images and static assets in Amazon S3, with the backend deployed on Amazon EC2 within a secure VPC, and Route 53 managing the domain. Users can customize portions, receive personalized recipe suggestions, and order ingredients for delivery. Key features include a diverse recipe library, accurate calorie calculations, and low operational costs.
+#### The Solution
+The platform employs Spring Boot for a robust REST API back-end handling user registration, recipe management, shopping cart, and order processing, with React delivering a user-friendly front-end featuring AI-driven meal recommendations. Data is stored in Amazon EC2 (PostgreSQL), images and static assets in Amazon S3, with front-end, back-end, AI model deployed on another Amazon EC2 instance within a secure VPC, and Route 53 managing the domain. Users can customize portions, receive personalized recipe suggestions, and order ingredients for delivery. Key features include a diverse recipe library, accurate calorie calculations, and relatively low operational costs.
 
-### Benefits and Return on Investment
+#### Benefits and Return on Investment
 The solution establishes a comprehensive platform for the nutrition startup to expand services while collecting user data for enhanced recommendation systems. It eliminates manual calorie calculations and fragmented shopping through an integrated system, simplifying nutrition planning and driving revenue from ingredient sales. Estimated monthly costs are $21.13 (per AWS Pricing Calculator), totaling approximately $253.56 for 12 months. Development leverages open-source frameworks, incurring no additional hardware costs. ROI is expected within 6–12 months through user time savings and consistent order revenue.
 
 ### 3. Solution Architecture
-The platform leverages a VPC-based AWS architecture to host a scalable web application. The front-end components run in a public subnet and connect securely to back-end services within private subnets. Traffic from the internet flows through an Internet Gateway (IGW) to the front-end instances, which interact with back-end instances for business logic and data processing. The database resides in a private subnet for enhanced security and isolation. Route 53 manages DNS routing, while an S3 bucket provides application storage accessible through VPC endpoints. IAM controls access permissions, and CI/CD pipelines are orchestrated using AWS CodeBuild and CodePipeline to automate deployments.
+The platform leverages a secure, scalable, and automated AWS architecture to host and deploy web applications following CI/CD best practices. It integrates infrastructure automation, high availability, and global content delivery using AWS services. Source code is managed in GitLab and automatically deployed to private EC2 instances via CodePipeline and CodeDeploy. Security is enforced at multiple layers through IAM, WAF, and Secrets Manager, while CloudFront, Elastic Load Balancing, and EC2 Auto Scaling ensure performance and resilience. Monitoring and logging are managed through CloudWatch and CloudTrail.
 
 ![Architecture](/images/2-Proposal/architecture.png)
 
-### AWS Services Used
-- **Amazon VPC**: Provides an isolated network with public and private subnets across one Availability Zone.
-- **Amazon EC2**: Hosts front-end and back-end application servers.
-- **Amazon RDS**: Managed relational database service in a private subnet.
-- **Amazon S3**: Used as application storage for assets and data backups.
-- **VPC Endpoint**: Enables private connection from EC2 instances to S3 without Internet access.
-- **Amazon Route 53**: Manages domain name resolution for external access.
-- **AWS CodeBuild & CodePipeline**: Automate build and deployment processes from GitHub to EC2.
-- **AWS IAM**: Manages secure user access and permissions.
+#### AWS Services Used
+- **Amazon Route 53:** Manages DNS and routes user traffic to CloudFront.
+- **AWS WAF:** Protects the application from common web exploits and DDoS attacks.
+- **Amazon CloudFront:** Delivers cached content globally for lower latency.
+- **Elastic Load Balancing (ALB):** Distributes traffic across EC2 instances in multiple Availability Zones.
+- **Amazon EC2 (Auto Scaling):** Hosts application and database workloads with dynamic scaling for performance and cost optimization.
+- **Amazon S3:** Stores static assets, media files, and deployment artifacts.
+- **AWS CodePipeline:** Automates build, test, and deployment workflows.
+- **AWS CodeBuild:** Builds and tests source code before deployment.
+- **AWS CodeDeploy:** Automates deployment to EC2 instances.
+- **AWS IAM:** Controls permissions and roles securely across AWS services.
+- **AWS Secrets Manager:** Stores and manages sensitive credentials securely.
+- **Amazon Cognito:** Manages user authentication and access control.
+- **Amazon CloudWatch:** Monitors system and application performance.
+- **AWS CloudTrail:** Logs and audits API activity across the AWS environment.
 
-### Component Design
-- **Networking**: The architecture runs within a single VPC containing one public and two private subnets.
+#### Component Design
+- **Networking**: Deployed within a VPC spanning multiple Availability Zones, using private subnets for the application and database to ensure security and redundancy.
+- **Traffic Management**: Users access the system via Route 53, which routes requests to CloudFront for caching and delivery. WAF filters malicious requests before forwarding them to the Application Load Balancer.
+- **Application Tier**: The Auto Scaling Group runs EC2 instances in private subnets. The ALB evenly distributes traffic to ensure high availability and fault tolerance.
+- **Data Tier**: The data tier is isolated within private subnets, communicating securely with the application tier to avoid public exposure.
+- **Storage**: Amazon S3 stores static files, mostly images, and build artifacts from the CI/CD pipeline.
+- **CI/CD Pipeline**: Developers push code to GitLab, triggering AWS CodePipeline.
+**CodeBuild** compiles and tests the code, stores artifacts in **S3**, and **CodeDeploy** handles automated deployments to EC2 instances.
+- **Security**: Access is managed through IAM and Cognito, while Secrets Manager protects sensitive credentials like database passwords and API keys.
+- **Monitoring & Logging**: CloudWatch provides monitoring, alerts, and performance insights.
+**CloudTrail records all API calls for auditing and compliance purposes.
 
-- **Front-End Layer**: EC2 instance in the public subnet handles web traffic via the IGW, registered with Route 53.
-
-- **Back-End Layer**: EC2 instance in the private subnet processes requests from the front-end and communicates with the database.
-
-- **Data Layer**: RDS instance resides in a private subnet for persistent data storage.
-
-- **Storage Layer**: Application data and files are stored in Amazon S3, accessible through the VPC Endpoint.
-
-- **CI/CD Pipeline**: CodePipeline and CodeBuild pull code from GitHub, build, and deploy updates to the respective EC2 instances.
-
-- **Security & Access Control**: IAM roles and policies manage user permissions, ensuring only authorized services can access resources.
-
-## 4. Technical Implementation
+### 4. Technical Implementation
 
 **Implementation Phases**
 This project has two parts—developing Spring Boot back-end and React frontend and deploy the website to AWS using AWS services each following 4 phases.
@@ -75,31 +78,34 @@ This project has two parts—developing Spring Boot back-end and React frontend 
 
 ---
 
-## 5. Timeline & Milestones
-
-### Project Timeline
-
-- **Pre-Project (Month 1):** Team formation, role assignment (backend, frontend, AWS deployment), requirement gathering, and drafting the initial system architecture.
+### 5. Timeline & Milestones
+- **Pre-Project (Month 1):** Team formation, role assignment (back-end, front-end, AWS deployment), requirement gathering, and drafting the initial system architecture.
 - **Project Execution (Months 1–3):**
   - **Month 1:** Build theory and draw architecture (Spring Boot backend + React frontend design, database schema). Begin initial development of backend and frontend.
   - **Month 2:** Continue backend and frontend development, perform unit and integration testing. Use AWS Pricing Calculator to evaluate hosting costs and refine architecture for cost-effectiveness.
-  - **Month 3:** Integrate AWS services (EC2, RDS, S3, VPC, Route 53), configure CI/CD pipelines, conduct staging tests, and deploy the website to production.
-- **Post-Launch:** Up to 3 months for maintenance, optimization, and feature enhancements (e.g., scaling backend, improving UI/UX, adding new features).
+  - **Month 3:** Integrate AWS services (EC2, S3, VPC, Route 53), configure CI/CD pipelines, conduct staging tests, and deploy the website to production.
+- **Post-Launch:** Up to 9 months for maintenance, optimization, and feature enhancements (e.g., scaling backend, improving UI/UX, adding new features).
 
-## 6. Budget Estimation
+### 6. Budget Estimation
+- Amazon Route 53: $0.9/month (1 Hosted zones, 1 millions per month standard queries, 1 Basic Checks Within AWS)
+- AWS WAF: $11.6/month (1/month Number of Web Access Control Lists (Web ACLs) utilized, 4/month Number of Rules added per Web ACL, 2/month Number of Managed Rule Groups per Web ACL, 1 million/month Number of web requests received across all web ACLs)
+- Amazon CloudFront: $0.06/month (Asia Pacific: 1 GB/month Data transfer out to origin)
+- Application Load Balancer (ALB): $18.63/month (1 Number of Application Load Balancers, 10 GB per month Processed bytes(EC2 instances and IP addresses as targets), 1 per second Average number of new connections per ALB, 1 seconds Average connection duration, 2 Average number of requests per second per ALB, 3 Average number of rule evaluations per request)
+- Amazon EC2 Application: $52.92/month (Shared Instances, Linux, Daily spike traffic, 1 Baseline, 2 Peak, 3 hours duration of peaks, m6g.large, EC2 Instance Savings Plans)
+- Amazon EC2 Data Tier: $9.78/month (Shared Instances, Linux, t4g.small, EC2 Instances Savings Plans)
+- Amazon S3: $3.72/month (1GB/month S3 Standard storage, 1MB S3 Standard Average Object Size, 10000  PUT, COPY, POST, LIST requests to S3 Standard, 100000 GET, SELECT, and all other requests from S3 Standard, 1GB per month Inbound Data Transfer, 30GB per month Outbound Data Transfer)
+- AWS CodePipeline: $0 (1 Number of active pipelines of type V1 used per account per month, 60 Number of action execution minutes used in pipeline of type V2 per account per month)
+- AWS CodeBuild: $0 (On-Demand Lambda AWS CodeBuild Compute TypeType, 3 Number of builds in a month, 10 secons Average build duration, lambda.arm.2GB, Linux)
+- AWS CodeDeploy: 0$
+- AWS Secrets Manager: $0.4/month (1 Number of secrets, 30 days Average duration of each secret, 5/month API calls)
+- Amazon Cognito: $14.25/month (1000 Number of monthly active users (MAU), Disabled Advanced security features, 1000 Number of monthly active users (MAU) who sign in through SAML or OIDC federation)
+- Amazon CloudWatch: $4.91/month (7 Number of Metrics (includes detailed and custom metrics), 7 GetMetricData: Number of metrics requested, 3 GetMetricWidgetImage: Number of metrics requested, 5 Number of other API requests, 1GB Standard Logs: Data Ingested, 1GB Infrequent Access Logs: Data Ingested, 1GB Value of Standard Logs Delivered to CloudWatch Logs, 1GB Infrequent Access Logs Delivered to CloudWatch Logs, Yes to Store Logs: Assuming 1 month retention, Disabled Logs Delivered to S3: Format Converted to Apache Parquet, 2 Number of Dashboards, 5 Number of Standard Resolution Alarm Metrics, 1000 Monthly visitors to your web application, 20 Number of RUM events per visit, 100 Percentage of RUM event)
+- AWS CloudTrail: $1.77/month(1/month Write management events, 1 Write management trails, 1/month Read management events, 1 Read management trails, 1 S3 operations, 1 S3 trails, 1GB Data ingested - CloudTrail, 1GB Data Retention - One-year extendable retention pricing)
+- VPC Endpoints: $16.05/month(1 Number of In-use public IPv4 addresses, 20GB/month Intra-Region Data Transfer, 100GB/month Outbound Data Transfer)
 
-- AWS Service:
-  - VPC: $0.00/month (no cost for subnets, route tables, security groups)
-  - EC2: ≈$7.60/month (shared instances, Linux, constant usage, t4g.micro, 360 hours, 20 GB gp3)
-  - Route 53: $1.10/month (1 hosted zone, <1M DNS queries, 1 DNS Firewall)
-  - S3 Standard: ≈$0.33/month (10 GB, ~5000 requests, outbound data transfer)
-  - RDS: ≈$12.00/month (db.t4.micro, 20 GB storage, PostgreSQL, 360 hours, no performance insight)
-  - CodeBuild: ≈$0.10/month (3 of build in a month, 10 minutes duration, arm1.small, Linux)
-  - CodePipeline: $0.00/month (40 free action, free tier)
+Total: $134.99/month or $1,619.88/year.
 
-Total: ≈$21.13/month (excluding outbound data transfer), ≈253.56/12 months
-
-## 7. Risk Assessment
+### 7. Risk Assessment
 
 *Risk Matrix*
 - EC2 and RDS downtime: Medium impact, medium probability

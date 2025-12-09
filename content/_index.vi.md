@@ -7,6 +7,7 @@ chapter: false
 
 # Báo cáo thực tập
 ### Thông tin sinh viên:
+
 &emsp; **Họ và tên:** Nguyễn Trương Phúc Thịnh
 
 &emsp; **Số điện thoại:** 0907511320
@@ -23,7 +24,7 @@ chapter: false
 
 &emsp; **Vị trí thực tập:** Thực tập sinh FCJ
 
-&emsp; **Thời gian thực tập:** Từ ngày 08/09/2025 đến ngày ??/??/2025
+&emsp; **Thời gian thực tập:** Từ ngày 08/09/2025 đến ngày 09/12/2025
 
 ![Ảnh đại diện](/images/profile-picture.jpg)
 

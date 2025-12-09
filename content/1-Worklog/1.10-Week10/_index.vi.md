@@ -1,6 +1,6 @@
 ---
-title: "Worklog Tuần 10"
-date: "2025-09-09"
+title: "Nhật ký công việc Tuần 10"
+date: "2025-11-10"
 weight: 2
 chapter: false
 pre: " <b> 1.10. </b> "
@@ -10,47 +10,17 @@ pre: " <b> 1.10. </b> "
 ### Mục tiêu tuần 10:
 
 * Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+
 
 ### Các nhiệm vụ cần triển khai trong tuần này:
+
 | Thứ | Nhiệm vụ | Ngày | Nguồn tài liệu |
 | --- | -------- | ---- | -------------- |
-| 2 | | 15/09/2025 | |
-| 3 | | 16/09/2025 | |
-| 4 | | 17/09/2025 | |
-| 5 | | 18/09/2025 | |
-| 6 | | 19/09/2025 | |
+| 2 | - Làm việc với nhóm để thu thập và tạo dữ liệu. | 10/11/2025 | |
+| 3 | - Tạo thêm dữ liệu mô phỏng cho cơ sở dữ liệu. | 11/11/2025 | |
+| 4 | - Hoàn thành việc tạo dữ liệu cho cơ sở dữ liệu. | 12/11/2025 | |
+| 5 | - Bắt đầu xử lý dữ liệu cho mô hình đề xuất. | 13/11/2025 | |
+| 6 | - Thực hiện các chỉnh sửa cần thiết trong cơ sở dữ liệu. | 14/11/2025 | |
 
 
 ### Kết quả đạt được tuần 10:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

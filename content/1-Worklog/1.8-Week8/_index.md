@@ -1,9 +1,9 @@
 ---
 title: "Week 8 Worklog"
-date: "2025-09-09"
+date: "2025-10-27"
 weight: 1
 chapter: false
-pre: " <b> 1.8. </b> "
+pre: " <b> 1.08. </b> "
 ---
 
 
@@ -25,10 +25,10 @@ pre: " <b> 1.8. </b> "
 
 ### Week 8 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
+* Understood what AWS is and mastered the basic service groups:
   * Compute
   * Storage
-  * Networking 
+  * Networking
   * Database
   * ...
 

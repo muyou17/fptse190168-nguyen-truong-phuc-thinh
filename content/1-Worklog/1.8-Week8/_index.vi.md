@@ -1,13 +1,10 @@
 ---
-title: "Worklog Tuần 8"
-date: "2025-09-09"
+title: "Nhật ký công việc Tuần 8"
+date: "2025-10-27"
 weight: 1
 chapter: false
-pre: " <b> 1.8. </b> "
+pre: " <b> 1.08. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 8:
@@ -18,42 +15,11 @@ pre: " <b> 1.8. </b> "
 ### Các nhiệm vụ cần triển khai trong tuần này:
 | Thứ | Nhiệm vụ | Ngày | Nguồn tài liệu |
 | --- | -------- | ---- | -------------- |
-| 2 | | 15/09/2025 | |
-| 3 | | 16/09/2025 | |
-| 4 | | 17/09/2025 | |
-| 5 | | 18/09/2025 | |
-| 6 | | 19/09/2025 | |
+| 2 | | 27/10/2025 | |
+| 3 | | 28/10/2025 | |
+| 4 | - Đọc thư viện giải pháp AWS. | 29/10/2025 | [Thư viện giải pháp AWS](https://aws.amazon.com/solutions/) |
+| 5 | - Đọc thêm về các giải pháp từ thư viện AWS. | 30/10/2025 | [Thư viện giải pháp AWS](https://aws.amazon.com/solutions/) |
+| 6 | - Ôn lại kiến thức về AWS Well-Architected.<br> - Lên văn phòng AWS để làm bài kiểm tra giữa học kỳ. | 31/10/2025 | [Tổng quát về AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/) |
 
 
 ### Kết quả đạt được tuần 8:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
