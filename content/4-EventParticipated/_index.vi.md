@@ -1,46 +1,51 @@
 ---
-title: "Các events đã tham gia"
-date: "2025-09-09"
-weight: 4
-chapter: false
-pre: " <b> 4. </b> "
+title : "Sự kiện đã tham gia"
+date :  "2025-09-09" 
+weight : 4 
+chapter : false
+pre : " <b> 4. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+Trong kỳ thực tập của mình, em đã tham gia bốn sự kiện. Mỗi sự kiện đều là một trải nghiệm đáng nhớ, mang lại những kiến thức mới mẻ, thú vị và bổ ích, cùng với những món quà và những khoảnh khắc tuyệt vời.
 
-> Trong phần này, các bạn cần liệt kê và mô tả chi tiết các sự kiện (event) mà mình đã tham gia trong suốt quá trình thực tập hoặc làm việc. 
-> 
-> Mỗi sự kiện nên được trình bày theo định dạng Event 1, Event 2, Event 3…, kèm theo các thông tin:
-> * Tên sự kiện
-> * Thời gian tổ chức
-> * Địa điểm (nếu có)
-> * Vai trò của bạn trong sự kiện (người tham dự, hỗ trợ tổ chức, diễn giả, v.v.)
-> * Mô tả ngắn gọn nội dung và hoạt động chính trong sự kiện
-> * Kết quả hoặc giá trị đạt được (bài học, kỹ năng mới, đóng góp cho nhóm/dự án)
-> * Việc liệt kê này giúp thể hiện rõ sự tham gia thực tế của bạn, cũng như các kỹ năng mềm và kinh nghiệm bạn đã tích lũy qua từng sự kiện.
+# [Sự kiện 1](4.1-Event1/_index.md)
 
+**Tên sự kiện:** AWS Cloud Mastery Series #1
 
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
+**Thời gian:** 08:00, ngày 15 tháng 11 năm 2025
 
-### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
+**Địa điểm:** Tầng 26, Tòa nhà Bitexco, số 02 Hải Triều, Quận 1, TP. Hồ Chí Minh
 
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
+**Vai trò:** Người tham dự
 
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
+---
 
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
+# [Sự kiện 2](4.2-Event2/_index.md)
 
+**Tên sự kiện:** AWS Cloud Mastery Series #2
 
+**Thời gian:** 08:30, ngày 17 tháng 11 năm 2025
 
-### [Event 2](4.2-Event2/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
+**Địa điểm:** Tầng 26, Tòa nhà Bitexco, số 02 Hải Triều, Quận 1, TP. Hồ Chí Minh
 
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
+**Vai trò:** Người tham dự
 
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
+# [Sự kiện 3](4.3-Event3/_index.md)
 
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
+**Tên sự kiện:** AWS Cloud Mastery Series #3
 
+**Thời gian:** 08:30, ngày 29 tháng 11 năm 2025
+
+**Địa điểm:** Tầng 26, Tòa nhà Bitexco, số 02 Hải Triều, Quận 1, TP. Hồ Chí Minh
+
+**Vai trò:** Người tham dự
+
+# [Sự kiện 4](4.4-Event4/_index.md)
+
+**Tên sự kiện:** Building Agentic AI & Context Optimization with Amazon Bedrock
+
+**Thời gian:** 09:00, ngày 05 tháng 12 năm 2025
+
+**Địa điểm:** Tầng 26, Tòa nhà Bitexco, số 02 Hải Triều, Quận 1, TP. Hồ Chí Minh
+
+**Vai trò:** Người tham dự

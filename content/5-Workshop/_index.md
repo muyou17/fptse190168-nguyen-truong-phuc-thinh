@@ -1,6 +1,8 @@
 ---
 title: "Workshop"
-date: "2025-09-09"
+date: 2025-12-07
+
+
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
@@ -9,23 +11,23 @@ pre: " <b> 5. </b> "
 ⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
 {{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+# Automated Text-to-Speech Converter using Serverless
 
 #### Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+**Event-Driven Architecture** allows you to build applications that automatically respond to changes in state, such as a file upload, without provisioning or managing servers.
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+In this lab, you will learn how to create, configure, and test a Serverless pipeline that automatically converts text files into lifelike speech audio using AWS Managed Services.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+You will utilize two key mechanisms to process data asynchronously:
++ **S3 Event Notifications** - Configure Amazon S3 to act as an event source. It will automatically trigger a compute function whenever a new object is uploaded to a specific input folder.
++ **Managed AI Services** - Leverage Amazon Polly to synthesize speech from text. This allows you to add deep learning capabilities to your application through simple API calls, without needing data science expertise.
 
 #### Content
 
 1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
+2. [Prerequisite](5.2-Prerequiste/)
+3. [Build Core Logic (Lambda)](5.3-S3/)
+4. [Configure Storage (S3)](5.4-lambda/)
+5. [Testing Result](5.5-testing/)
 6. [Clean up](5.6-Cleanup/)

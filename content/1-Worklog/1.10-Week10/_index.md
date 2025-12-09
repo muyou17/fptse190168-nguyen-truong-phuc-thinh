@@ -1,7 +1,7 @@
 ---
 title: "Week 10 Worklog"
-date: "2025-09-09"
-weight: 2
+date: "2025-11-10"
+weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
@@ -9,47 +9,24 @@ pre: " <b> 1.10. </b> "
 
 ### Week 10 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Complete simulated data preparation for the database.
+* Begin data preprocessing steps to prepare for model training.
+
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Date | Reference Material |
 | --- | ---- | ---- | ------------------ |
-| 2 | | 09/22/2025 | |
-| 3 | | 09/23/2025 | |
-| 4 | | 09/24/2025 | |
-| 5 | | 09/25/2025 | |
-| 6 | | 09/26/2025 | |
+| 2 | - Work with team to collect and generate data. | 11/10/2025 | |
+| 3 | - Create additional simulated data for the database. | 11/11/2025 | |
+| 4 | - Finalize data simulation for the database. | 11/12/2025 | |
+| 5 | - Begin data preprocessing for the recommendation model. | 11/13/2025 | |
+| 6 | - Make necessary data adjustments in the database. | 11/14/2025 | |
 
 
 ### Week 10 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Completed the collection and generation of necessary data for the system.
+* Built a relatively complete simulated dataset for model training.
+* Started preprocessing and standardizing input data.
+* Ensured the dataset was updated and structured properly for the next development phase.

@@ -1,32 +1,40 @@
 ---
 title : "Clean up"
-date: "2025-09-09"
+date : 2025-12-07
+
+
 weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
 Congratulations on completing this workshop! 
-In this workshop, you learned architecture patterns for accessing Amazon S3 without using the Public Internet. 
-+ By creating a gateway endpoint, you enabled direct communication between EC2 resources and Amazon S3, without traversing an Internet Gateway. 
-+ By creating an interface endpoint you extended S3 connectivity to resources running in your on-premises data center via AWS Site-to-Site VPN or Direct Connect. 
+In this workshop, you learned architecture patterns for building Serverless Event-driven applications on AWS.
 
-#### clean up
-1. Navigate to Hosted Zones on the left side of Route 53 console. Click the name of *s3.us-east-1.amazonaws.com* zone. Click Delete and confirm deletion by typing delete. 
+By configuring S3 Event Notifications, you enabled an automated workflow where compute resources (AWS Lambda) react instantly to data ingestion without the need for manual intervention or server management.
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+By integrating Amazon Polly, you successfully leveraged Managed AI Services to transform text into lifelike speech, demonstrating how to add complex machine learning capabilities to your application with minimal code.
 
-2. Disassociate the Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it. 
-
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
-
-4. Open the CloudFormation console  and delete the two CloudFormation Stacks that you created for this lab:
-+ PLOnpremSetup
-+ PLCloudSetup
-
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
-
-5. Delete S3 buckets
+#### Clean up
+1. Delete S3 buckets
 + Open S3 console
-+ Choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
++ Open s3-demo-bucket
++ Choose 2 folders ```input``` and ```output```
++ Click **delete** and confirm 
+![delete s3](/images/5-Workshop/5.6-Cleanup/delete-folder.jpg)
++ Then choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
+![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.jpg)
 
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+
+2. Delete Lambda function
++ Open the lambda console 
++ Find **workshop1** and click **action**
++ Choose **Delete** and confirm 
+
+![delete lambda](/images/5-Workshop/5.6-Cleanup/delete-lambda.jpg)
+
+3. Delete IAM role
++ Open IAM console
++ Select **Roles** from the menu on the left.
++ Find the role **PollyLambdaRole**.
++ Select the role and click **Delete**.
+![delete s3](/images/5-Workshop/5.6-Cleanup/delete-IAM.jpg)

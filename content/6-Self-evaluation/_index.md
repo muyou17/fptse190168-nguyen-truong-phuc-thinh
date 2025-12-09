@@ -31,6 +31,6 @@ To objectively reflect on my internship period, I would like to evaluate myself 
 
 ### Needs Improvement
 
-* Strengthen discipline and the motivation to complete tasks on time.
+* Strengthen discipline and motivation to complete tasks on time.
 * Be more proactive in seeking out tasks and taking initiative.
 * Improve problem-solving skills by identifying, proposing solutions, and showing creativity more effectively.

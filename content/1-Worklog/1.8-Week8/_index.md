@@ -1,55 +1,32 @@
 ---
 title: "Week 8 Worklog"
 date: "2025-10-27"
-weight: 1
+weight: 8
 chapter: false
-pre: " <b> 1.08. </b> "
+pre: " <b> 1.8. </b> "
 ---
 
 
 ### Week 8 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Strengthen knowledge in preparation for the midterm examination.
+* Visit the AWS office to receive the shirt and take the midterm test.
+
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Date | Reference Material |
 | --- | ---- | ---- | ------------------ |
-| 2 | | 09/22/2025 | |
-| 3 | | 09/23/2025 | |
-| 4 | | 09/24/2025 | |
-| 5 | | 09/25/2025 | |
-| 6 | | 09/26/2025 | |
+| 2 | - Discuss midterm topics with FCJ peers.<br>- Conduct knowledge review and cross-checking with team members. | 10/27/2025 | |
+| 3 | - Research common questions for the SSA certification examination. | 10/28/2025 | |
+| 4 | - Read and explore AWS Solutions Library. | 10/29/2025 | [AWS Solutions Library](https://aws.amazon.com/solutions/) |
+| 5 | - Continue studying solutions from AWS Solutions Library. | 10/30/2025 | [AWS Solutions Library](https://aws.amazon.com/solutions/) |
+| 6 | - Revise the AWS Well-Architected Framework.<br>- Visit the AWS office to receive the FCJ shirt and take the midterm examination. | 10/31/2025 | [AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/) |
 
 
 ### Week 8 Achievements:
 
-* Understood what AWS is and mastered the basic service groups:
-  * Compute
-  * Storage
-  * Networking
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Conducted group discussions and strengthened knowledge through peer review sessions.
+* Gained familiarity with common question types for the SSA examination.
+* Improved understanding of solution architectures via AWS Well-Architected and AWS Solutions Library.
+* Took the midterm examination.
