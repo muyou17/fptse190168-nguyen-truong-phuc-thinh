@@ -1,126 +1,98 @@
 ---
 title: "Blog 3"
-date: "2025-09-09"
-weight: 1
+date: "2025-10-10"
+weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+# Getting started with Amazon EC2 bare metal instances for Amazon RDS for Oracle and Amazon RDS Custom for Oracle
+*by Sameer Malik and Nitin Saxena | on 04 SEP 2025 | in Amazon EC2 Bare Metal, Amazon RDS, Amazon RDS Custom, Intermediate (200), RDS for Oracle, Technical How-to | [Permalink](https://aws.amazon.com/blogs/database/getting-started-with-amazon-ec2-bare-metal-instances-for-amazon-rds-for-oracle-and-amazon-rds-custom-for-oracle/)*
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+Amazon Relational Database Service (Amazon RDS) for Oracle is a fully managed commercial database that makes it straightforward to set up, operate, and scale Oracle deployments in the cloud. Amazon RDS Custom for Oracle makes it possible for you as a database administrator to access and customize your Oracle database environment and operating system.
 
----
+In this post, we explore the support for AWS bare metal instances on Amazon EC2 bare metal Instances for Amazon RDS for Oracle and RDS Custom for Oracle.
 
-## Architecture Guidance
+Amazon EC2 bare metal instances are designed to provide your applications with direct access to the processor and memory of the underlying server. Amazon EC2 bare metal instances provide capacity fully dedicated for use in a non-shared tenancy model and offer a higher level of isolation compared to shared virtualized instances.
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+These bare metal instances might also offer additional licensing benefits to use your eligible software licenses for Bring Your Own License (BYOL) licensing models from vendors such as Microsoft and Oracle. For additional details on the licensing benefits of using Amazon EC2 bare metal instances, refer to the post Oracle Licensing Efficiency With Dedicated Hosts from AWS licensing partner House of Brick.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+Additionally, Amazon EC2 bare metal instances on Amazon RDS for Oracle and RDS Custom for Oracle are offered at 25% lower compute cost than virtualized instances of the same size, making Oracle workloads on RDS bare metal instances more cost-effective.
 
-**The solution architecture is now as follows:**
+## Common use cases for EC2 bare metal instances
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+The following are common use cases for EC2 bare metal instances:
 
----
+* Support for workloads with restrictive licensing – This is often the primary driver, especially for traditional enterprise software like Oracle Database, SQL Server, SAP, or Windows Server, where licensing might be more favorable on physical cores or dedicated hardware.
+* High-performance computing (HPC) and scientific simulations – These workloads require the absolute highest performance, direct access to specialized hardware features, or very low-latency inter-node communication.
+* Legacy applications – These applications are not supported in virtualized environments or require specific hardware access.
+* Isolation and security – Bare metal instances offer a higher level of isolation compared to shared virtualized instances, which can be beneficial for highly sensitive workloads or compliance requirements. It also serves as an option when your organization is looking to run certain applications on a single-tenant infrastructure in non-virtualized environments to meet any specific corporate compliance and regulatory requirements.
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+## Benefits of using RDS bare metal instances on Amazon RDS for Oracle and RDS Custom for Oracle
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+RDS bare metal instances offer the following benefits:
+* Licensing benefits – Because RDS bare metal instances provide capacity fully dedicated for your use in a non-shared tenancy model, the licensing can become more akin to on-premises deployments where customers (depending on their contract with Oracle) can apply traditional core-based licensing and Oracle processor core factor.
+* Lower compute cost – RDS bare metal instances for Amazon RDS for Oracle and RDS Custom for Oracle offer 25% lower compute costs compared to equivalent virtualized instances. For example, an m6i.metal bare metal instance costs 25% less than an m6i.32xlarge virtualized instance.
+* Effective database consolidation – With the licensing benefits and lower compute costs for bare metal instances on Amazon RDS for Oracle and RDS Custom for Oracle, you can effectively consolidate your database workloads using currently supported database consolidation methods such as schema consolidation and Oracle multi-tenant options.
+* Enhanced performance for specific workloads – Customers running their Oracle Database workload on the virtualized environment and utilizing more than half the cores of the entire physical server can now enjoy the performance of the full physical server (such as CPU, memory, IOPS, and throughput) at no additional licensing cost.
 
----
+## Create an RDS for Oracle bare metal instance using the Amazon RDS console
 
-## Technology Choices and Communication Scope
+In this section, we demonstrate how to create an RDS for Oracle DB instance with the bare metal instance type using the AWS Management Console. For details and prerequisites, refer to Create an Oracle DB instance.
+1. Sign in to the Amazon RDS console.
+2. In the upper-right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance.
+3. In the navigation pane, choose Databases.
+4. Choose Create database.
+5. Select Standard create.
+6. For Engine type, select Oracle.
+7. For Database management type, select Amazon RDS.
+8. For Edition, select Oracle Enterprise Edition.
+9. For License model, leave the default Bring Your Own License (BYOL).
+10. For Engine version, choose your preferred version.
+11. In the Templates section, select Production.
+12. For DB instance identifier, enter a name for your DB instance.
+13. In the Credentials Settings section, provide a username for the admin user, select Self-managed for Credentials management, and enter your password.
+14. For Encryption key, use your choice of encryption key.
+15. In the Instance configuration section, for the DB instance class, choose a bare metal instance (for example, db.m6i.metal).
+16. Complete the rest of the instance creation steps and choose Create database.
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+After you create your DB instance, you can verify its status on the Amazon RDS console.
 
----
+## Create an RDS for Oracle bare metal instance using the AWS CLI
 
-## The Pub/Sub Hub
+You can also create a bare metal instance using the AWS Command Line Interface (AWS CLI), as shown in the following code. Make sure the AWS CLI is configured with the necessary credentials and default Region.
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+```bash
+aws rds create-db-instance \
+        --db-instance-identifier metaldb \
+        --db-instance-class db.m6i.metal \
+        --engine oracle-ee \
+        --allocated-storage 100 \
+        --master-username <username> \
+        --master-user-password <YourStrongPassword> \
+        --engine-version 19.0.0.0.ru-2025-04.spb-1.r1\
+        --license-model license-included \
+        --publicly-accessible false \
+       --storage-encrypted \
+        --vpc-security-group-ids sg-xxxxxxxxxxxxxxxxx \
+        --db-subnet-group-name my-db-subnet-group
+```
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+## Clean up
 
----
+To avoid paying the cost for running the RDS instance, delete the above provisioned RDS instance. You can delete a DB instance using the AWS Management Console, the AWS CLI, or the RDS API. For more details on the how to delete the RDS instance, refer to Deleting a DB instance.
 
-## Core Microservice
+## Conclusion
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+With Amazon EC2 bare metal instances for Amazon RDS for Oracle and RDS Custom for Oracle, you can benefit from additional licensing flexibility and lower cost options to effectively run your Oracle Database workloads on Amazon RDS for Oracle and RDS Custom for Oracle. For more details about this launch, refer to What’s new.
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+## About the authors
 
----
+### Sameer Malik
 
-## Front Door Microservice
+Sameer has been working on relational Databases for over 23 years now and is currently working as a Principal Database Solution Architect at AWS focused on RDS and Aurora. He has helped several customers with the migration and modernization of their Database workloads to AWS.
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+### Nitin Saxena
 
----
-
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Nitin is a Software Development Manager in RDS DBS Managed Commercial Engines with Amazon Web Services. He focuses on services like RDS Oracle and RDS Custom for Oracle. He enjoys designing and developing new features on RDS Oracle and RDS Custom to solve customer problems.

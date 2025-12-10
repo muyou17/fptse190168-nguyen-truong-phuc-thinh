@@ -1,127 +1,101 @@
 ---
 title: "Blog 2"
-date: "2025-09-09"
-weight: 1
+date: "2025-10-09"
+weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Giảm chi phí Amazon ElastiCache của bạn lên đến 60% với Valkey và CUDOS
+*bởi Chris Gillespie, Brenno Passanha, và Yuriy Prykhodko | vào 04/09/2025 | trong Amazon ElastiCache, Cloud Cost Optimization, Intermediate (200), Technical How-to | [Link cố định](https://docs.google.com/document/d/1suPwHOCkhGvLkEFdOxGAjkcEHFrdCOrxE_tu7Y2OhZA/edit?usp=sharing)*
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+Trong bài viết này, chúng tôi sẽ hướng dẫn bạn cách tiết kiệm chi phí trên Amazon ElastiCache bằng cách nâng cấp công cụ cụm (cluster engine) của bạn lên ElastiCache cho Valkey. Nếu bạn hiện đang sử dụng ElastiCache cho Redis OSS, bạn có thể đạt được mức tiết kiệm chi phí lên đến 60% bằng cách nâng cấp lên Valkey.
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
+Chúng tôi cũng sẽ giới thiệu cho bạn CUDOS dashboard, một phần của Cloud Intelligence Dashboards (CID) framework mã nguồn mở, để bạn có thể xem mức tiết kiệm chi phí khi chuyển từ ElastiCache Redis sang Valkey trong tổ chức của mình, theo dõi tiến độ đạt được các mục tiêu này và ưu tiên các nỗ lực nâng cấp.
 
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+## Amazon ElastiCache cho Valkey
 
----
+Valkey là một kho dữ liệu key-value mã nguồn mở, hiệu năng cao, được điều hành bởi Linux Foundation và được hỗ trợ bởi hơn 50 công ty bao gồm Ericsson, Google Cloud, Aiven, Oracle, Percona, ByteDance và Amazon Web Services (AWS). Valkey là một bản thay thế tương thích hoàn toàn (drop-in replacement) cho Redis OSS và đã được cộng đồng đón nhận nhanh chóng kể từ khi dự án được khởi xướng. Valkey hiện khả dụng như một dịch vụ được quản lý thông qua ElastiCache.
 
-## Hướng dẫn kiến trúc
+Với ElastiCache cho Valkey, bạn có thể chọn giữa các cụm tự thiết kế (node-based) hoặc triển khai bộ nhớ đệm serverless. ElastiCache cho Valkey Serverless có giá thấp hơn 33% so với các engine được hỗ trợ khác, và cụm tự thiết kế (node-based) có giá thấp hơn 20%. Bạn có thể chuyển sang các mức giá thấp hơn này thông qua quá trình nâng cấp tại chỗ (in-place), không downtime, từ cụm ElastiCache hiện có sử dụng Redis OSS sang Valkey. Các Reservation ElastiCache for Redis OSS hiện có của bạn vẫn tiếp tục được áp dụng.
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
+## Nâng cấp lên ElastiCache cho Valkey
 
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
+Khi ElastiCache thực hiện quá trình nâng cấp từ Redis OSS lên Valkey, nó sẽ tuân theo cùng một quy trình như một nâng cấp major version của engine Redis OSS hiện có. Nếu cụm của bạn là cụm tự thiết kế, bạn nên tuân thủ các best practice khi nâng cấp.
 
-**Kiến trúc giải pháp bây giờ như sau:**
+Khi bắt đầu nâng cấp, bạn có thể chọn phiên bản chính (major version) của Valkey. Valkey khả dụng từ phiên bản 7.2, bao gồm các thay đổi từ Redis OSS cho đến phiên bản 7.2.4. Nếu cụm của bạn đang chạy Redis OSS ở phiên bản cũ hơn 7.2.4, bạn nên xem xét các thay đổi có thể ảnh hưởng đến workload của bạn.
 
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+Nâng cấp lên phiên bản 8.1 sẽ mang lại những lợi ích bổ sung như tăng tốc độ mở rộng, Bloom filters, cập nhật có điều kiện, và nhiều cải tiến khác. Phiên bản 8.0 đã bao gồm cải thiện về sử dụng bộ nhớ so với Valkey 7.2 (và do đó là so với tất cả các phiên bản Redis OSS), với cải thiện xa hơn hơn nữa vào phiên bản 8.1. Biểu đồ dưới đây minh họa sự cải thiện về mức sử dụng bộ nhớ đối với một workload mẫu. Phân tích chi tiết hơn có thể được tìm thấy trong bài viết Năm đầu của Valkey: Những đổi mới mã nguồn mở và ElastiCache phiên bản 8.1.
 
----
+Cải thiện 40% về hiệu suất sử dụng bộ nhớ có thể cho phép bạn giảm kích thước loại node trong một cụm thiết kế thủ công. Điều này sẽ tiết kiệm chi phí thêm khoảng 50% cho cùng một khối lượng công việc. Tổng mức tiết kiệm chi phí trong trường hợp này sẽ là 60% (`1 - (0.8 * 0.5)`).
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+Bạn có thể bắt đầu nâng cấp ElastiCache Redis OSS sang Valkey thông qua AWS Management Console, AWS Command Line Interface (AWS CLI), AWS API, hoặc AWS CloudFormation.
+* Console – Với các cụm tự thiết kế hoặc serverless, hãy làm theo hướng dẫn tại Nâng cấp từ ElastiCache cho Redis OSS lên ElastiCache cho Valkey trong Bắt đầu với Amazon ElastiCache cho Valkey.
+* AWS CLI – Dùng lệnh  `modify-cache-cluster` hoặc `modify-serverless-cache`. Thiết lập engine thành valkey và chỉ định phiên bản. Ví dụ, để nâng cấp một cụm tự thiết kế lên Valkey phiên bản 8.0, dùng lệnh:
+```bash
+aws elasticache modify-cache-cluster \
+  --cache-cluster-id my-cluster \
+  --engine valkey \
+  --engine-version 8.0
+```
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Với cụm serverless, dùng:
+```bash
+aws elasticache modify-serverless-cache-instance \
+  --cache-cluster-id my-serverless-cluster \
+  --engine valkey \
+  --engine-version 8.0
+```
+* API – Dùng API ModifyCacheCluster hoặc ModifyServerlessCacheInstance. Thiết lập tham số Engine thành valkey và EngineVersion thành phiên bản chính mong muốn.
+* CloudFormation – Cập nhật các thuộc tính CacheClusterEngine và CacheClusterEngineVersion trong tài nguyên AWS::ElastiCache::CacheCluster hoặc AWS::ElastiCache::GlobalReplicationGroup.
 
----
+Trong quá trình nâng cấp, trạng thái cụm sẽ hiển thị là modifying. Sau khi hoàn tất, trạng thái sẽ chuyển về available. Quá trình nâng cấp tự động xử lý việc di chuyển dữ liệu, và cụm của bạn vẫn khả dụng suốt quá trình.
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+Việc lập kế hoạch và ưu tiên di chuyển, hiểu rõ tiềm năng tiết kiệm trên từng tài nguyên, và theo dõi hiệu suất ở quy mô lớn đòi hỏi khả năng quan sát tổng thể. Để đơn giản hóa những công việc này, AWS cung cấp CUDOS dashboard, giúp bạn có cái nhìn chi tiết về cơ hội tiết kiệm chi phí trên toàn bộ tài nguyên ElastiCache của mình.
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+## Cloud Intelligent Dashboards framework
 
----
+CUDOS dashboard là một phần của Cloud Intelligence Dashboards (CID) framework mã nguồn mở. Bạn có thể triển khai khung này trong tài khoản AWS của mình bằng cách sử dụng mẫu cơ sở hạ tầng dưới dạng mã (Infrastructure as Code – IaC) được cung cấp sẵn. Framework này giúp bạn tăng cường trách nhiệm tài chính, tối ưu hoá chi phí và nâng cao hiệu quả vận hành trên toàn bộ tổ chức AWS của bạn. CUDOS dashboard cung cấp các thông tin chi tiết và có thể hành động, cho phép bạn ra quyết định dựa trên dữ liệu nhằm đạt được hiệu quả chi phí cao hơn trong cơ sở hạ tầng AWS của mình.
 
-## The pub/sub hub
+## Thông tin nâng cấp ElastiCache trong CUDOS
 
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
+CUDOS phiên bản 5.6 giới thiệu một phần ElastiCache toàn diện, giúp bạn chuyển đổi quy trình di trú Redis sang Valkey thành một chiến lược tối ưu hóa dựa trên dữ liệu. Dashboard cung cấp các tính năng sau:
+* Theo dõi quá trình áp dụng bằng hình ảnh – Theo dõi tiến trình áp dụng của bạn với các biểu đồ rõ ràng thể hiện tỷ lệ giữa Redis OSS, Valkey tự thiết kế (self-designed) và Valkey serverless theo thời gian.
+* Đo lường mức tiết kiệm – Xem hiệu quả chi phí đã đạt được trong quá khứ từ các cụm đã nâng cấp lên Valkey.
+* Khuyến nghị chi tiết – Phân tích từng cụm riêng biệt, hiển thị chi phí hiện tại của Redis OSS, chi phí ước tính khi dùng Valkey, và tiềm năng tiết kiệm chính xác cho từng tài khoản AWS và cụm ElastiCache.
 
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+Bảng phân tích chi phí chi tiết trong dashboard hiển thị chính xác cụm nào mang lại tiềm năng tiết kiệm cao nhất, với chi phí hiện tại trên Redis OSS, chi phí ước tính nếu nâng cấp lên Valkey, và khoản tiết kiệm hàng tháng dự kiến. Bạn có thể lọc các cơ hội tiết kiệm này dựa trên hệ thống phân loại nội bộ của doanh nghiệp, chẳng hạn như thẻ phân bổ chi phí, đơn vị tổ chức, danh mục chi phí, hoặc các chiều dữ liệu khác phù hợp với quy trình ra quyết định của tổ chức bạn.
 
----
+## Bắt đầu với CUDOS
 
-## Core microservice
+Để bắt đầu với CUDOS, bạn có thể khám phá phần ElastiCache trong interactive demo dashboard. Hãy làm theo hướng dẫn triển khai để thiết lập CUDOS trong tổ chức của bạn.
 
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
+Nếu bạn đã sử dụng CUDOS, hãy làm theo hướng dẫn cập nhật để nâng cấp lên phiên bản 5.6. Bạn cũng có thể dùng hướng dẫn thêm phân loại tổ chức để thêm khả năng lọc trực quan theo thẻ (tags), danh mục chi phí, và các chiều dữ liệu khác trong hệ thống phân loại của tổ chức.
 
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
+Bạn có thể truy cập trang Cloud Intelligence Dashboards để tìm hiểu thêm về các dashboard khác giúp bạn phân tích vận hành.
 
----
+## Tổng kết
 
-## Front door microservice
+ElastiCache for Valkey là một giải pháp thay thế tương thích hoàn toàn (drop-in replacement) cho ElastiCache for Redis OSS. Bằng cách nâng cấp các cụm ElastiCache for Redis OSS hiện có sang ElastiCache for Valkey, bạn sẽ:
+* Giảm 33% chi phí đối với cụm serverless, hoặc 20% chi phí đối với cụm tự thiết kế (node-based).
+* Tiếp tục sử dụng các gói đặt chỗ (Reservations) hiện tại của ElastiCache for Redis OSS cho các cụm đã nâng cấp.
+* Thực hiện quy trình nâng cấp tại chỗ không downtime, đảm bảo gián đoạn ứng dụng tối thiểu.
+* Cải thiện hiệu suất sử dụng bộ nhớ ElastiCache, với khả năng giảm kích thước node trong cụm tự thiết kế, mang lại tiết kiệm chi phí bổ sung lên đến 50%.
 
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
+Để tính toán và theo dõi các khoản tiết kiệm hiệu quả này trên toàn tổ chức, cũng như ưu tiên kế hoạch di trú, bạn có thể sử dụng CUDOS dashboard, nơi cung cấp phần chuyên biệt về di trú ElastiCache Redis sang Valkey.
 
----
+Tại AWS, chúng tôi tin rằng Valkey đại diện cho tương lai của các hệ thống lưu trữ dữ liệu trong bộ nhớ. Để biết hướng dẫn từng bước về cách bắt đầu với ElastiCache for Valkey, hãy xem Bắt đầu với Amazon ElastiCache for Valkey hoặc truy cập tài liệu Amazon ElastiCache.
 
-## Staging ER7 microservice
+## Về các tác giả
 
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
+### Chris Gillespie
 
----
+Chris là Senior Solutions Architect tại Vương quốc Anh. Anh dành phần lớn thời gian làm việc với các khách hàng “sinh ra trên đám mây”. Ngoài công việc, Chris dành thời gian cho gia đình và rèn luyện sức khỏe.
 
-## Tính năng mới trong giải pháp
+### Brenno Passanha
 
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Brenno là Senior Technical Account Manager. Anh là thành viên của Cloud Operations Technical Field Community, chuyên tập trung vào Cloud Financial Management. Ngoài giờ làm việc, Brenno thích dành thời gian chăm sóc con cái, đi du lịch khắp thế giới và tạo nên những kỷ niệm qua những trải nghiệm mới.
+
+### Yuriy Prykhodko
+
+Yuriy là Principal Technical Account Manager làm việc tại Luxembourg. Anh giúp khách hàng xây dựng các hệ thống trên AWS có độ tin cậy cao và chi phí tối ưu. Yuriy cũng là chuyên gia FinOps và là tác giả kiêm trưởng nhóm phát triển Cloud Intelligence Dashboards. Trong thời gian rảnh, anh thích chơi bóng rổ và đi du lịch vòng quanh thế giới cùng gia đình và bạn bè.

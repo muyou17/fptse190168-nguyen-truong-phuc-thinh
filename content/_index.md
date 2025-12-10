@@ -26,7 +26,7 @@ chapter: false
 
 &emsp; **Internship Position:** FCJ Intern
 
-&emsp; **Internship Duration:** From 08/09/2025 to ??/??/2025
+&emsp; **Internship Duration:** From 09/08/2025 to 12/09/2025
 
 ![Profile picture](/images/profile-picture.jpg)
 

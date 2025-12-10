@@ -7,332 +7,76 @@ pre: " <b> 3.1. </b> "
 ---
 
 
-# Thí nghiệm ML nhanh chóng cho doanh nghiệp với Amazon SageMaker AI và Comet
+# Các mẫu kiến trúc Generative AI Serverless – Phần 1
+*bởi Michael Hume và Parnab Basak | vào 04/09/2025 | trong Advanced (300), Generative AI, Serverless, Technical How-to | [Link cố định](https://docs.google.com/document/d/1Rwwsy9gce_iqj3hUYwqMI0sjJP6kWSaN6uVlFOxr2bM/edit?usp=sharing)*
 
-*Bài đăng này được viết cùng với Sarah Ostermeier từ Comet.*
+Các tổ chức thuộc mọi quy mô và loại hình đang khai thác các mô hình ngôn ngữ lớn (LLM) và mô hình nền tảng (FM) để xây dựng các ứng dụng generative AI mang lại trải nghiệm mới cho khách hàng và nhân viên. Serverless computing cung cấp giải pháp hoàn hảo, giúp các tổ chức tập trung vào đổi mới, tính linh hoạt và hiệu quả chi phí mà không cần phải quản lý phức tạp cơ sở hạ tầng. Các tổ chức chuyển đổi các triển khai thử nghiệm của họ thành các ứng dụng sẵn sàng cho sản xuất có thể áp dụng các mẫu thiết kế phần mềm đã được chứng minh, có khả năng mở rộng và dễ bảo trì làm nền tảng cho kiến trúc của họ.
+Loạt bài gồm hai phần này khám phá các mẫu kiến trúc, thực tiễn tốt nhất, triển khai mã nguồn và các cân nhắc thiết kế cần thiết để tích hợp thành công các giải pháp generative AI vào cả ứng dụng mới và hiện có. Trong bài viết này, chúng tôi tập trung vào các mẫu áp dụng cho việc kiến trúc các ứng dụng generative AI thời gian thực. Phần 2 sẽ đề cập đến các mẫu để xây dựng các triển khai generative AI theo lô sử dụng các dịch vụ serverless.
 
-Khi các tổ chức doanh nghiệp mở rộng các sáng kiến học máy (ML) từ giai đoạn chứng minh ý tưởng sang sản xuất, độ phức tạp trong việc quản lý các thí nghiệm, theo dõi dòng dõi mô hình, và quản lý khả năng tái tạo tăng lên theo cấp số nhân. Điều này chủ yếu là do các nhà khoa học dữ liệu và kỹ sư ML liên tục khám phá các kết hợp khác nhau của siêu tham số, kiến trúc mô hình, và phiên bản tập dữ liệu, tạo ra lượng lớn siêu dữ liệu cần được theo dõi để đảm bảo khả năng tái tạo và tuân thủ quy định. Khi việc phát triển mô hình ML mở rộng qua nhiều đội nhóm và yêu cầu quy định ngày càng nghiêm ngặt, việc theo dõi thí nghiệm trở nên phức tạp hơn bao giờ hết. Với các quy định AI ngày càng tăng, [đặc biệt là ở EU](https://artificialintelligenceact.eu/), các tổ chức hiện yêu cầu các bản ghi kiểm toán chi tiết về dữ liệu huấn luyện mô hình, kỳ vọng hiệu suất, và quy trình phát triển, khiến việc theo dõi thí nghiệm trở thành một nhu cầu kinh doanh thiết yếu, không chỉ là một thực hành tốt nhất.
+## Separation of concerns
 
-[Amazon SageMaker AI](https://aws.amazon.com/sagemaker-ai/) cung cấp cơ sở hạ tầng được quản lý mà các doanh nghiệp cần để mở rộng khối lượng công việc ML, xử lý việc cung cấp tính toán, huấn luyện phân tán, và triển khai mà không cần gánh nặng cơ sở hạ tầng. Tuy nhiên, các đội nhóm vẫn cần khả năng theo dõi thí nghiệm mạnh mẽ, so sánh mô hình, và khả năng cộng tác vượt xa việc ghi log cơ bản.
+Một nguyên tắc cơ bản trong việc xây dựng các ứng dụng generative AI mạnh mẽ là separation of concerns, bao gồm việc phân chia stack ứng dụng thành ba thành phần riêng biệt: lớp front-end, lớp middleware và lớp dịch vụ back-end. Cách tiếp cận kiến trúc này (như được hiển thị trong sơ đồ sau) mang lại nhiều lợi ích, bao gồm giảm độ phức tạp, tăng khả năng bảo trì và khả năng mở rộng các thành phần một cách độc lập. Bằng cách triển khai sự tách biệt này, bạn có thể phát triển các giải pháp đa nền tảng trong khi vẫn duy trì tính linh hoạt để phát triển từng thành phần theo các yêu cầu cụ thể.
 
-[Comet](https://www.comet.com/site/) là một nền tảng quản lý thí nghiệm ML toàn diện, tự động theo dõi, so sánh, và tối ưu hóa các thí nghiệm ML trong suốt vòng đời mô hình. Nó cung cấp cho các nhà khoa học dữ liệu và kỹ sư ML các công cụ mạnh mẽ để theo dõi thí nghiệm, giám sát mô hình, tối ưu hóa siêu tham số, và phát triển mô hình cộng tác. Nó cũng cung cấp [Opik](https://www.comet.com/site/products/opik/), nền tảng mã nguồn mở của Comet để quan sát và phát triển LLM.
+Mặc dù các tầng này chỉ là sự mở rộng của stack phần mềm truyền thống, chúng thực hiện một số tác vụ cụ thể trong các ứng dụng generative AI.
 
-Comet có sẵn trong SageMaker AI dưới dạng một [Ứng dụng AI Đối tác](https://docs.aws.amazon.com/sagemaker/latest/dg/partner-apps.html), như một khả năng quản lý thí nghiệm được quản lý hoàn toàn, với bảo mật cấp doanh nghiệp, tích hợp quy trình làm việc liền mạch, và quy trình mua sắm đơn giản thông qua [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-etdyy6ne2onzg).
+### Lớp front-end
 
-Sự kết hợp này đáp ứng nhu cầu của một quy trình làm việc ML doanh nghiệp từ đầu đến cuối, trong đó SageMaker AI xử lý cơ sở hạ tầng và tính toán, còn Comet cung cấp khả năng quản lý thí nghiệm, đăng ký mô hình, và giám sát sản xuất mà các đội nhóm yêu cầu để tuân thủ quy định và hiệu quả vận hành. Trong bài đăng này, chúng tôi thể hiện một quy trình phát hiện gian lận hoàn chỉnh bằng cách sử dụng SageMaker AI với Comet, thể hiện khả năng tái tạo và ghi log sẵn sàng kiểm toán mà các doanh nghiệp cần hiện nay.
+Lớp front-end đóng vai trò là giao diện chính giữa người dùng cuối và ứng dụng generative AI. Đối với các tổ chức tích hợp generative AI vào các ứng dụng hiện có, lớp này có thể đã được thiết lập. Front-end xử lý các trách nhiệm quan trọng bao gồm xác thực người dùng, trình bày UI/UX và giao tiếp API. AWS cung cấp một bộ dịch vụ serverless mạnh mẽ để hỗ trợ triển khai front-end, bao gồm AWS Amplify cho full-stack development, Amazon CloudFront kết hợp với Amazon Simple Storage Service (Amazon S3) cho content delivery, và các container services như  Amazon Elastic Container Service (Amazon ECS) và Amazon Elastic Kubernetes Service (Amazon EKS) cho host ứng dụng. Các dịch vụ chuyên biệt như Amazon Lex có thể nâng cao user experience thông qua conversational interfaces và intelligent search capabilities để xây dựng interactive chatbots.
 
-## Comet sẵn sàng cho doanh nghiệp trên SageMaker AI
+### Lớp middleware
 
-Trước khi tiến hành các hướng dẫn cài đặt, các tổ chức phải xác định [mô hình vận hành](https://docs.aws.amazon.com/whitepapers/latest/sagemaker-studio-admin-best-practices/operating-model.html) của mình và dựa trên đó, quyết định cách cài đặt Comet. Chúng tôi khuyên bạn nên triển khai Comet bằng cách sử dụng mô hình vận hành liên kết. Trong kiến trúc này, Comet được quản lý tập trung và lưu trữ trong một tài khoản dịch vụ chia sẻ, và mỗi đội ngũ khoa học dữ liệu duy trì các môi trường hoàn toàn tự trị. Mỗi mô hình vận hành đi kèm với những lợi ích và hạn chế riêng. Để biết thêm thông tin, hãy tham khảo Thực hành tốt nhất cho [Quản trị Amazon SageMaker Studio](https://docs.aws.amazon.com/whitepapers/latest/sagemaker-studio-admin-best-practices/sagemaker-studio-admin-best-practices.html).
+Lớp này đại diện cho lớp tích hợp, bao gồm ba lớp nhỏ thiết yếu quản lý các khía cạnh khác nhau của logic ứng dụng và luồng dữ liệu:
+* Lớp API – Lớp này cung cấp các dịch vụ back-end thông qua các giao thức khác nhau, bao gồm REST, GraphQL, và WebSockets. Nó xử lý các chức năng thiết yếu như xác thực input, quản lý lưu lượng và hỗ trợ CORS. Lớp API cũng triển khai các cơ chế ủy quyền và kiểm soát truy cập, quản lý phiên bản API và cung cấp khả năng giám sát. Nó đảm bảo giao tiếp an toàn và hiệu quả giữa các thành phần front-end và back-end trong khi duy trì. Các dịch vụ quản lý của AWS như Amazon API Gateway và AWS AppSync có thể giúp tạo ra một AI gateway để đơn giản hóa access và API management.
+* Lớp prompt engineering – Lớp này bao gồm logic nghiệp vụ cần thiết để tương tác với LLM. Nó xử lý dynamic prompt generation, model selection, prompt caching, model routing, guardrails và security enforcement. Layer này triển khai token và context window optimization, sensitive information filtering, output content moderation, error handling, retry logic và audit trails. Bằng cách tập trung hoá các chức năng này, bạn có thể duy trì consistent prompt strategies, enforce security và optimize model interactions trên các ứng dụng. Bạn có thể sử dụng Amazon DynamoDB để store prompt templates và configurations, đồng thời sử dụng Amazon Bedrock Guardrails, Amazon Bedrock prompt caching, và Amazon Bedrock Intelligent Prompt, để triển khai responsible AI safeguards, reuse của prompt prefixes và dynamic routing, tương ứng.
+* Lớp điều phối – Lớp này quản lý các tương tác phức tạp giữa các thành phần hệ thống khác nhau. Nó phối hợp các API call bên ngoài và các agent call, quản lý các truy vấn cơ sở dữ liệu vector, lưu trữ phiên người dùng và lịch sử hội thoại, đồng thời duy trì ngữ cảnh hội thoại qua nhiều tương tác LLM. Các framework như LangChain và LlamaIndex thường được sử dụng để đơn giản hóa các hoạt động này và cung cấp các cách tiếp cận tiêu chuẩn cho các tác vụ generative AI phổ biến. AWS Step Functions có direct integrations với hơn 220 AWS services, bao gồm Amazon Bedrock, cho phép bạn xây dựng luồng công việc Generative AI workflows mà không cần thêm tài nguyên tính toán. Ngoài ra, với Amazon Bedrock Flows, bạn có thể tạo complex, flexible, multi-prompt workflows để evaluate, compare và version.
 
-Hãy cùng đi sâu vào việc cài đặt Comet trong SageMaker AI. Các doanh nghiệp lớn thường có các vai trò sau:
-- **Quản trị viên** – Chịu trách nhiệm thiết lập các dịch vụ cơ sở hạ tầng chung và môi trường cho các đội nhóm sử dụng trường hợp.
-- **Người dùng** – Các nhà thực hành ML từ các đội nhóm sử dụng trường hợp, sử dụng các môi trường do đội nền tảng thiết lập để giải quyết các vấn đề kinh doanh của họ.
+### Dịch vụ back-end, agent và nguồn dữ liệu private
 
-Trong các phần sau, chúng ta sẽ đi qua hành trình của từng vai trò.
+Lớp back-end tạo thành lõi của phản hồi generative AI được hỗ trợ bởi LLM. Nó bao gồm lưu trữ và gọi mô hình LLM, agent, knowledge bases hoặc một máy chủ Model Context Protocol (MCP), Amazon Bedrock, Amazon SageMaker JumpStart và  Amazon SageMaker cung cấp nhiều FM hiệu năng cao từ công ty AI hàng đầu hoặc cấu trúc tùy chọn để tự mang mô hình bạn. Bạn có thể chạy một máy chủ MCP sử dụng container, như được mô tả trong Hướng dẫn triển khai máy chủ Model Context Protocol trên AWS.
+Nguồn dữ liệu private bổ sung cho LLM bằng cách cung cấp kiến thức độc quyền có thẩm quyền ngoài dữ liệu huấn luyện của nó. Đối với triển khai Retrieval Augmented Generation (RAG), Amazon Kendra, Amazon OpenSearch Serverless, và Amazon Aurora PostgreSQL-Compatible Edition với pgVector cung cấp tùy chọn cơ sở dữ liệu vector mạnh mẽ, có khả năng mở rộng. Để tìm hiểu sâu hơn, vui lòng đọc Vai trò của cơ sở dữ liệu vector trong các ứng dụng generative AI về các lựa chọn dịch vụ AWS có sẵn để lưu trữ embedding trong cơ sở dữ liệu vector chuyên dụng.
+Các ứng dụng thời gian thực xử lý và cung cấp phản hồi với độ trễ tối thiểu, nâng cao trải nghiệm người dùng và hỗ trợ ra quyết định nhanh hơn. Trong các phần sau, chúng tôi khám phá một số mẫu kiến trúc có thể được sử dụng để triển khai các ứng dụng generative AI thời gian thực.
 
-Comet hoạt động tốt với cả SageMaker AI và Amazon SageMaker. SageMaker AI cung cấp môi trường phát triển tích hợp (IDE) Amazon SageMaker Studio, và SageMaker cung cấp IDE Amazon SageMaker Unified Studio. Trong bài đăng này, chúng tôi sử dụng SageMaker Studio.
+## Mẫu 1: Phản hồi yêu cầu đồng bộ (synchronous request response)
 
-### Hành trình của quản trị viên
+Trong mẫu này, các phản hồi được tạo và truyền ngay lập tức, trong khi client chặn/chờ phản hồi. Mặc dù mẫu này dễ triển khai, có luồng dự đoán được và cung cấp tính nhất quán mạnh, nó gặp phải các vấn đề như hoạt động chặn, độ trễ cao và khả năng xảy ra timeout. Khi được triển khai cho các ứng dụng generative AI, mẫu này đặc biệt phù hợp với một số phương thức như tạo video hoặc hình ảnh. Đối với các tương tác LLM nhanh, nó có thể xử lý nhiều yêu cầu đồng thời trong khi duy trì hiệu suất ổn định dưới các tải khác nhau. Mô hình này có thể được triển khai thông qua nhiều cách tiếp cận kiến trúc.
 
-Trong kịch bản này, quản trị viên nhận được yêu cầu từ một đội nhóm làm việc trên trường hợp sử dụng phát hiện gian lận để cung cấp một môi trường ML với thiết lập huấn luyện và thí nghiệm được quản lý hoàn toàn. Hành trình của quản trị viên bao gồm các bước sau:
+### REST API
 
-1. Thực hiện các điều kiện tiên quyết để [thiết lập Ứng dụng AI Đối tác](https://docs.aws.amazon.com/sagemaker/latest/dg/partner-app-onboard.html). Điều này thiết lập quyền cho quản trị viên, cho phép Comet đảm nhận [vai trò thực thi SageMaker AI](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html) thay mặt cho người dùng và các đặc quyền bổ sung để quản lý đăng ký Comet thông qua AWS Marketplace.
-2. Trên bảng điều khiển SageMaker AI, trong mục **Ứng dụng và IDE** trong bảng điều hướng, chọn **Ứng dụng AI Đối tác**, sau đó chọn **Xem chi tiết** cho Comet.
-![](/images/3-BlogsTranslated/blog-1-1.png)
-Các chi tiết được hiển thị, bao gồm mô hình định giá hợp đồng cho Comet và chi phí ước tính của cấp độ cơ sở hạ tầng.
-![](/images/3-BlogsTranslated/blog-1-2.png)
-Comet cung cấp các tùy chọn đăng ký khác nhau từ hợp đồng 1 tháng đến 36 tháng. Với hợp đồng này, người dùng có thể truy cập Comet trong SageMaker. Dựa trên số lượng người dùng, quản trị viên có thể xem xét và phân tích kích thước phiên bản phù hợp cho máy chủ bảng điều khiển Comet. Comet hỗ trợ từ 5–500 người dùng chạy hơn 100 công việc thí nghiệm.
-3. Chọn **Đi đến Marketplace để đăng ký** để được chuyển hướng đến danh sách Comet trên AWS Marketplace.
-4. Chọn **Xem tùy chọn mua hàng**.
+Bạn có thể sử dụng RESTful API để giao tiếp với back-end qua các yêu cầu HTTP. Bạn có thể sử dụng API REST hoặc HTTP trong API Gateway hoặc một Application Load Balancer cho định tuyến dựa trên đường dẫn đến middleware. API Gateway cung cấp các tính năng bổ sung như xác thực dựa trên token, custom authorizers, quyền dựa trên tài nguyên, ánh xạ và chuyển đổi yêu cầu/phản hồi, quản lý phiên bản và giới hạn tốc độ. Tuy nhiên, với REST/HTTP APIs trong API Gateway, phản hồi phải được tạo trong vòng 29 giây để đáp ứng timeout tích hợp mặc định. Bạn có thể mở rộng giới hạn mặc định này lên 5 phút cho REST API với khả năng giảm quota giới hạn cấp vùng AWS cho tài khoản của bạn. Để xem ví dụ triển khai, hãy tham khảo Tương tác với mô hình Bedrock từ một hàm Lambda được đặt trước bởi API Gateway.
 
-Trong biểu mẫu đăng ký, cung cấp các chi tiết cần thiết.
+### GraphQL HTTP API
 
-Khi đăng ký hoàn tất, quản trị viên có thể bắt đầu cấu hình Comet.
+Bạn có thể sử dụng AWS AppSync làm tầng API để tận dụng các lợi ích của GraphQL API. GraphQL API cung cấp khả năng lấy dữ liệu khai báo và hiệu quả bằng cách sử dụng định nghĩa typed schema, cache dữ liệu serverless, đồng bộ hóa dữ liệu ngoại tuyến, bảo mật và kiểm soát truy cập chi tiết. Nó cũng cung cấp các nguồn dữ liệu và resolver để viết logic nghiệp vụ. Nếu bạn không cần tầng mutation, AWS AppSync có thể gọi trực tiếp một LLM trong Amazon Bedrock. Thời gian tích hợp của AWS AppSync được đặt mặc định là 30 giây và không thể mở rộng. Nếu bạn cần thực hiện các hoạt động có thể mất nhiều thời gian hơn, hãy xem xét triển khai các mẫu không đồng bộ hoặc chia nhỏ hoạt động thành các phần nhỏ hơn. Để xem ví dụ tích hợp, hãy tham khảo Gọi mô hình Amazon Bedrock từ resolver HTTP của AWS AppSync.
 
-5. Trong khi triển khai Comet, thêm trưởng nhóm dự án của đội nhóm trường hợp sử dụng phát hiện gian lận làm quản trị viên để quản lý các hoạt động quản trị cho bảng điều khiển Comet.
+### Giao diện chatbot hội thoại
 
-Việc triển khai máy chủ Comet mất vài phút. Để biết thêm chi tiết về bước này, hãy tham khảo [Partner AI App provisioning](#).
+Amazon Lex là một dịch vụ để xây dựng các giao diện hội thoại bằng giọng nói và văn bản, cung cấp khả năng nhận diện giọng nói và hiểu ngôn ngữ. Nó đơn giản hóa việc phát triển đa phương thức và cho phép xuất bản chatbot lên các dịch vụ trò chuyện và thiết bị di động khác nhau. Nó cung cấp tích hợp gốc với Lambda để đơn giản hóa việc phát triển chatbot. Khi một hàm Lambda được sử dụng cho việc hoàn thành, thời gian phản hồi mặc định được đặt là 30 giây. Để vượt qua, bạn có thể sử dụng các cập nhật hoàn thành để cung cấp các cập nhật định kỳ cho người dùng, để người dùng biết rằng chatbot vẫn đang xử lý yêu cầu của họ. Để xem ví dụ triển khai, hãy tham khảo Tăng cường Amazon Connect và Lex với khả năng của generative AI. Sơ đồ sau minh họa kiến trúc giải pháp.
 
-6. Thiết lập một miền SageMaker AI theo các bước trong [Use custom setup for Amazon SageMaker AI](#). Theo thực hành tốt nhất, cung cấp một URL miền đã ký trước cho thành viên đội nhóm trường hợp sử dụng để truy cập trực tiếp vào giao diện người dùng Comet mà không cần đăng nhập vào bảng điều khiển SageMaker.
-7. Thêm các thành viên đội nhóm vào miền này và kích hoạt quyền truy cập vào Comet trong khi cấu hình miền.
+### Sử dụng điều phối để gọi mô hình
 
-Bây giờ miền SageMaker AI đã sẵn sàng để người dùng đăng nhập và bắt đầu làm việc trên trường hợp sử dụng phát hiện gian lận.
+AWS Step Functions cho phép điều phối và phối hợp nhiều tác vụ, với tích hợp gốc trên các dịch vụ AWS như Amazon API Gateway, AWS Lambda và Amazon DynamoDB. AWS Step Functions cung cấp các tính năng tích hợp như điều phối hàm, phân nhánh, xử lý lỗi, xử lý song song và khả năng human-in-the-loop. Nó cũng có tích hợp tối ưu với Amazon Bedrock, cho phép gọi trực tiếp các mô hình nền tảng Amazon Bedrock từ các luồng công việc AWS Step Functions. Với tích hợp này, bạn có thể thực hiện các tác vụ sau:
+* Làm phong phú thêm việc xử lý dữ liệu Step Functions với khả năng generative AI cho các tác vụ như tóm tắt văn bản, tạo hình ảnh hoặc cá nhân hóa.
+* Truy xuất và đưa dữ liệu cập nhật (như giá sản phẩm hoặc hồ sơ người dùng) vào lời nhắc LLM để cải thiện độ chính xác.
+* Điều phối các cuộc gọi LLM và tác nhân trong một chuỗi xử lý tùy chỉnh, sử dụng các mô hình phù hợp nhất ở mỗi giai đoạn.
+* Triển khai các tương tác human-in-the-loop để kiểm duyệt phản hồi và xử lý hiện tượng ảo giác của FM.
 
-### Hành trình của người dùng
+Để xem ví dụ triển khai sử dụng API Gateway, hãy tham khảo Prompt chaining với Amazon API Gateway và AWS Step Functions. Để xem ví dụ triển khai sử dụng AWS AppSync, hãy tham khảo Prompt chaining với AWS AppSync, AWS Step Functions và Amazon Bedrock. Sơ đồ sau minh họa một kiến trúc ví dụ.
 
-Bây giờ, hãy khám phá hành trình của một nhà thực hành ML từ trường hợp sử dụng phát hiện gian lận. Người dùng hoàn thành các bước sau:
+## Mẫu 2: Phản hồi yêu cầu bất đồng bộ (asynchronous request response)
 
-1. Đăng nhập vào miền SageMaker AI thông qua URL đã ký trước.
+Mẫu này cung cấp kênh giao tiếp full-duplex, hai chiều giữa client và server mà không yêu cầu clients phải chờ cập nhật. Lợi ích lớn nhất là tính non-blocking có thể xử lý các hoạt động kéo dài. Tuy nhiên, chúng phức tạp hơn để triển khai vì yêu cầu quản lý kênh, message và trạng thái. Mô hình này có thể được triển khai thông qua hai cách tiếp cận kiến trúc.
 
-Bạn sẽ được chuyển hướng đến IDE SageMaker Studio. Tên người dùng và vai trò thực thi AWS Identity and Access Management (IAM) của bạn được quản trị viên cấu hình sẵn.
+### WebSocket API
 
-2. Tạo một Không gian JupyterLab theo hướng dẫn người dùng JupyterLab.
-3. Bạn có thể bắt đầu làm việc trên trường hợp sử dụng phát hiện gian lận bằng cách khởi tạo một sổ Jupyter.
+Giao thức WebSocket cho phép giao tiếp đồng bộ thời gian thực giữa front-end và middleware, cho phép nhắn tin full-duplex, hai chiều qua kết nối TCP liên tục. Hành vi hai chiều này nâng cao tương tác client/dịch vụ, cho phép các dịch vụ đẩy dữ liệu đến client mà không cần yêu cầu rõ ràng. Sử dụng API Gateway, bạn có thể tạo một WebSocket API làm giao diện trạng thái cho một dịch vụ AWS (như Lambda hoặc DynamoDB) hoặc cho một điểm cuối HTTP. WebSocket API gọi back-end của bạn dựa trên nội dung của các thông điệp nó nhận được từ ứng dụng client. Sau khi thông điệp được tạo, back-end có thể gửi các thông điệp gọi lại đến các client được kết nối. Mỗi chu kỳ yêu cầu-phản hồi phải hoàn thành trong vòng 29 giây, như được xác định bởi timeout tích hợp API Gateway cho WebSockets. Thời gian kết nối cho WebSocket APIs của API Gateway có thể lên đến 2 giờ với timeout kết nối idle là 10 phút, những điều này không thể được mở rộng. Để xem ví dụ triển khai, hãy tham khảo AI Chat with Amazon API Gateway (WebSockets), AWS Lambda and Amazon Bedrock. Sơ đồ sau minh họa một kiến trúc ví dụ.
 
-Quản trị viên cũng đã thiết lập quyền truy cập cần thiết vào dữ liệu thông qua một thùng Amazon Simple Storage Service (Amazon S3).
+AWS AppSync có thể thiết lập và duy trì các kết nối WebSocket an toàn cho các hoạt động đăng ký GraphQL, cho phép các ứng dụng middleware phân phối dữ liệu thời gian thực từ các nguồn dữ liệu đến các subscriber. Nó cũng hỗ trợ một mô hình publish-subscribe đơn giản, nơi các giao diện client có thể lắng nghe các kênh hoặc chủ đề cụ thể, với AWS AppSync quản lý nhiều kênh pub/sub tạm thời và các kết nối WebSocket để phân phối và lọc dữ liệu dựa trên tên kênh. Để xem ví dụ triển khai, hãy tham khảo AI Chat với AWS AppSync (WebSockets), AWS Lambda và Amazon Bedrock. Sơ đồ sau minh họa một kiến trúc ví dụ.
 
-4. Để truy cập API Comet, cài đặt thư viện `comet_ml` và cấu hình các biến môi trường cần thiết như mô tả trong [Set up the Amazon SageMaker Partner AI Apps SDKs](#).
-5. Để truy cập giao diện người dùng Comet, chọn Ứng dụng AI Đối tác trong bảng điều hướng SageMaker Studio và chọn Mở cho Comet.
+## Mẫu 3: Phản hồi luồng bất đồng bộ (asynchronous streaming response)
+Mẫu luồng này cho phép luồng phản hồi thời gian thực đến client theo từng phần, nâng cao trải nghiệm người dùng và giảm thiểu độ trễ phản hồi đầu tiên. Mẫu này sử dụng các khả năng luồng tích hợp trong các dịch vụ như Amazon Bedrock (các API InvokeModelWithResponseStream hoặc ConverseStream) và suy luận thời gian thực với SageMaker, cho phép các ứng dụng hiển thị kết quả từng phần thay vì chờ phản hồi hoàn chỉnh. Mẫu này đặc biệt hiệu quả cho các ứng dụng triển khai phương thức văn bản như giao diện trò chuyện và công cụ tạo nội dung dựa trên từ.
+Việc triển khai được thực hiện thông qua API Gateway WebSocket API hoặc AWS AppSync WebSocket API hoặc đăng ký GraphQL, với sự cân nhắc cẩn thận về quản lý thời gian chờ và xử lý kết nối.
 
-Bây giờ, hãy cùng đi qua việc triển khai trường hợp sử dụng.
-
-## Tổng quan về giải pháp
-
-Trường hợp sử dụng này làm nổi bật các thách thức doanh nghiệp phổ biến: làm việc với các tập dữ liệu không cân bằng (trong ví dụ này, chỉ 0,17% giao dịch là gian lận), yêu cầu nhiều lần lặp thí nghiệm, và duy trì khả năng tái tạo hoàn toàn để tuân thủ quy định. Để theo dõi, hãy tham khảo tài liệu Comet và Hướng dẫn Bắt đầu Nhanh để biết thêm chi tiết về cài đặt và API.
-
-Đối với trường hợp sử dụng này, chúng tôi sử dụng tập dữ liệu Phát hiện Gian lận Thẻ Tín dụng. Tập dữ liệu chứa các giao dịch thẻ tín dụng với nhãn nhị phân đại diện cho giao dịch gian lận (1) hoặc hợp pháp (0). Trong các phần sau, chúng tôi đi qua một số phần quan trọng của việc triển khai. Toàn bộ mã của việc triển khai có sẵn trong kho GitHub.
-
-### Điều kiện tiên quyết
-
-Là điều kiện tiên quyết, cấu hình các thư viện nhập cần thiết và các biến môi trường cho tích hợp Comet và SageMaker:
-
-```python
-# Comet ML để theo dõi thí nghiệm
-import comet_ml
-from comet_ml import Experiment, API, Artifact
-from comet_ml.integration.sagemaker import log_sagemaker_training_job_v1
-AWS_PARTNER_APP_AUTH=true
-AWS_PARTNER_APP_ARN=<Your_AWS_PARTNER_APP_ARN>
-COMET_API_KEY=<Your_Comet_API_Key>  # Từ Trang Chi tiết, nhấp vào Mở Comet. Ở góc trên bên phải, nhấp vào người dùng -> Khóa API
-# Cấu hình Comet ML
-COMET_WORKSPACE = '<your-comet-workspace-name>'
-COMET_PROJECT_NAME = '<your-comet-project-name>'
-```
-
-### Chuẩn bị tập dữ liệu
-
-Một trong những tính năng doanh nghiệp chính của Comet là phiên bản hóa tập dữ liệu tự động và theo dõi dòng dõi. Khả năng này cung cấp khả năng kiểm toán đầy đủ về dữ liệu nào được sử dụng để huấn luyện mỗi mô hình, điều này rất quan trọng để tuân thủ quy định và khả năng tái tạo. Bắt đầu bằng cách tải tập dữ liệu:
-
-```css
-# Tạo một Artifact Comet để theo dõi tập dữ liệu gốc
-dataset_artifact = Artifact(
-    name="fraud-dataset",
-    artifact_type="dataset",
-    aliases=["raw"]
-)
-# Thêm tệp tập dữ liệu gốc vào artifact
-dataset_artifact.add_remote(s3_data_path, metadata={
-    "dataset_stage": "raw",
-    "dataset_split": "not_split",
-    "preprocessing": "none"
-})
-```
-
-### Bắt đầu một thí nghiệm Comet
-
-Với artifact tập dữ liệu đã được tạo, bạn có thể bắt đầu theo dõi quy trình làm việc ML. Việc tạo một thí nghiệm Comet tự động bắt đầu ghi lại mã, thư viện đã cài đặt, siêu dữ liệu hệ thống, và các thông tin ngữ cảnh khác trong nền. Bạn có thể ghi lại artifact tập dữ liệu đã tạo trước đó trong thí nghiệm. Xem mã sau:
-
-```java
-# Tạo một thí nghiệm Comet mới
-experiment_1 = comet_ml.Experiment(
-    project_name=COMET_PROJECT_NAME,
-    workspace=COMET_WORKSPACE,
-)
-# Ghi lại artifact tập dữ liệu vào thí nghiệm này để theo dõi dòng dõi
-experiment_1.log_artifact(dataset_artifact)
-```
-
-### Tiền xử lý dữ liệu
-
-Các bước tiếp theo là các bước tiền xử lý tiêu chuẩn, bao gồm loại bỏ các bản sao, bỏ các cột không cần thiết, chia thành các tập huấn luyện/xác thực/kiểm tra, và chuẩn hóa các đặc trưng bằng cách sử dụng `StandardScaler` của scikit-learn. Chúng tôi gói mã xử lý trong `preprocess.py` và chạy nó như một công việc Xử lý SageMaker. Xem mã sau:
-
-```css
-# Chạy công việc xử lý SageMaker
-processor = SKLearnProcessor(
-    framework_version='1.0-1',
-    role=sagemaker.get_execution_role(),
-    instance_count=1,
-    instance_type='ml.t3.medium'
-)
-processor.run(
-    code='preprocess.py',
-    inputs=[ProcessingInput(source=s3_data_path, destination='/opt/ml/processing/input')],
-    outputs=[ProcessingOutput(source='/opt/ml/processing/output', destination=f's3://{bucket_name}/{processed_data_prefix}')]
-)
-```
-
-Sau khi bạn gửi công việc xử lý, SageMaker AI khởi động các phiên bản tính toán, xử lý và phân tích dữ liệu đầu vào, và giải phóng tài nguyên sau khi hoàn thành. Đầu ra của công việc xử lý được lưu trữ trong thùng S3 đã chỉ định.
-
-Tiếp theo, tạo một phiên bản mới của artifact tập dữ liệu để theo dõi dữ liệu đã được xử lý. Comet tự động phiên bản hóa các artifact có cùng tên, duy trì dòng dõi hoàn chỉnh từ dữ liệu gốc đến dữ liệu đã được xử lý.
-
-```css
-# Tạo một phiên bản cập nhật của Artifact 'fraud-dataset' cho dữ liệu đã được xử lý
-preprocessed_dataset_artifact = Artifact(
-    name="fraud-dataset",
-    artifact_type="dataset",
-    aliases=["preprocessed"],
-    metadata={
-        "description": "Tập dữ liệu phát hiện gian lận thẻ tín dụng",
-        "fraud_percentage": f"{fraud_percentage:.3f}%",
-        "dataset_stage": "preprocessed",
-        "preprocessing": "StandardScaler + chia train/val/test",
-    }
-)
-# Thêm các tệp tập dữ liệu huấn luyện, xác thực, và kiểm tra làm tài sản từ xa
-preprocessed_dataset_artifact.add_remote(
-    uri=f's3://{bucket_name}/{processed_data_prefix}',
-    logical_path='split_data'
-)
-# Ghi lại tập dữ liệu đã cập nhật vào thí nghiệm để theo dõi các cập nhật
-experiment_1.log_artifact(preprocessed_dataset_artifact)
-```
-
-### Quy trình thí nghiệm Comet và SageMaker AI
-
-Các nhà khoa học dữ liệu thích thí nghiệm nhanh; do đó, chúng tôi tổ chức quy trình làm việc thành các hàm tiện ích có thể tái sử dụng, có thể được gọi nhiều lần với các siêu tham số khác nhau trong khi duy trì ghi log và đánh giá nhất quán qua tất cả các lần chạy. Trong phần này, chúng tôi giới thiệu các hàm tiện ích cùng với một đoạn mã ngắn bên trong hàm:
-
-- **train()** – Khởi tạo một công việc huấn luyện mô hình SageMaker bằng thuật toán XGBoost tích hợp sẵn của SageMaker:
-
-```css
-# Tạo bộ ước lượng SageMaker
-estimator = Estimator(
-    image_uri=xgboost_image,
-    role=execution_role,
-    instance_count=1,
-    instance_type='ml.m5.large',
-    output_path=model_output_path,
-    sagemaker_session=sagemaker_session_obj,
-    hyperparameters=hyperparameters_dict,
-    max_run=1800  # Thời gian huấn luyện tối đa tính bằng giây
-)
-# Bắt đầu huấn luyện
-estimator.fit({
-    'train': train_channel,
-    'validation': val_channel
-})
-```
-
-- **log_training_job()** – Ghi lại siêu dữ liệu và số liệu huấn luyện và liên kết tài sản mô hình với thí nghiệm để đảm bảo khả năng truy xuất nguồn gốc hoàn chỉnh:
-
-```code
-# Ghi lại công việc huấn luyện SageMaker vào Comet
-log_sagemaker_training_job_v1(
-    estimator=training_estimator,
-    experiment=api_experiment
-)
-```
-
-- **log_model_to_comet()** – Liên kết các artifact mô hình với Comet, ghi lại siêu dữ liệu huấn luyện, và liên kết tài sản mô hình với thí nghiệm để đảm bảo khả năng truy xuất nguồn gốc hoàn chỉnh:
-
-```code
-experiment.log_remote_model(
-    model_name=model_name,
-    uri=model_artifact_path,
-    metadata=metadata
-)
-```
-
-- **deploy_and_evaluate_model()** – Thực hiện triển khai và đánh giá mô hình, và ghi log số liệu:
-
-```code
-# Triển khai đến điểm cuối
-predictor = estimator.deploy(
-    initial_instance_count=1,
-    instance_type="ml.m5.xlarge")
-# Ghi lại số liệu và hình ảnh hóa vào Comet
-experiment.log_metrics(metrics)
-experiment.log_confusion_matrix(matrix=cm, labels=['Normal', 'Fraud'])
-# Ghi lại đường cong ROC
-fpr, tpr, _ = roc_curve(y_test, y_pred_prob_as_np_array)
-experiment.log_curve("roc_curve", x=fpr, y=tpr)
-```
-
-Mã dự đoán và đánh giá hoàn chỉnh có sẵn trong kho GitHub.
-
-### Chạy các thí nghiệm
-
-Bây giờ bạn có thể chạy nhiều thí nghiệm bằng cách gọi các hàm tiện ích với các cấu hình khác nhau và so sánh các thí nghiệm để tìm ra cài đặt tối ưu nhất cho trường hợp sử dụng phát hiện gian lận.
-
-Đối với thí nghiệm đầu tiên, chúng tôi thiết lập một đường cơ sở bằng cách sử dụng các siêu tham số XGBoost tiêu chuẩn:
-
-```css
-# Xác định siêu tham số cho thí nghiệm đầu tiên
-hyperparameters_v1 = {
-    'objective': 'binary:logistic',  # Phân loại nhị phân
-    'num_round': 100,               # Số vòng tăng cường
-    'eval_metric': 'auc',           # Số liệu đánh giá
-    'learning_rate': 0.15,          # Tỷ lệ học
-    'booster': 'gbtree'             # Thuật toán tăng cường
-}
-# Huấn luyện mô hình
-estimator_1 = train(
-    model_output_path=f"s3://{bucket_name}/{model_output_prefix}/1",
-    execution_role=role,
-    sagemaker_session_obj=sagemaker_session,
-    hyperparameters_dict=hyperparameters_v1,
-    train_channel_loc=train_channel_location,
-    val_channel_loc=validation_channel_location
-)
-# Ghi lại công việc huấn luyện và artifact mô hình
-log_training_job(experiment_key=experiment_1.get_key(), training_estimator=estimator_1)
-log_model_to_comet(experiment=experiment_1,
-                   model_name="fraud-detection-xgb-v1",
-                   model_artifact_path=estimator_1.model_data,
-                   metadata=metadata)
-# Triển khai và đánh giá
-deploy_and_evaluate_model(experiment=experiment_1,
-                         estimator=estimator_1,
-                         X_test_scaled=X_test_scaled,
-                         y_test=y_test
-                         )
-```
-
-Trong khi chạy một thí nghiệm Comet từ một sổ Jupyter, chúng ta cần kết thúc thí nghiệm để đảm bảo mọi thứ được ghi lại và lưu trữ trong máy chủ Comet. Xem mã sau: `experiment_1.end()`
-
-Khi thí nghiệm cơ sở hoàn tất, bạn có thể chạy các thí nghiệm bổ sung với các siêu tham số khác nhau. Kiểm tra sổ để xem chi tiết của cả hai thí nghiệm.
-
-Khi thí nghiệm thứ hai hoàn tất, điều hướng đến giao diện người dùng Comet để so sánh hai lần chạy thí nghiệm này.
-
-### Xem các thí nghiệm Comet trong giao diện người dùng
-
-Để truy cập giao diện người dùng, bạn có thể tìm URL trong IDE SageMaker Studio hoặc bằng cách thực thi mã được cung cấp trong sổ: `experiment_2.url`
-
-Ảnh chụp màn hình sau đây cho thấy giao diện người dùng thí nghiệm Comet. Các chi tiết thí nghiệm chỉ nhằm mục đích minh họa và không đại diện cho một thí nghiệm phát hiện gian lận thực tế.
-
-Điều này kết thúc thí nghiệm phát hiện gian lận.
-
-### Dọn dẹp
-
-Đối với phần thí nghiệm, cơ sở hạ tầng xử lý và huấn luyện SageMaker mang tính tạm thời và tự động tắt khi công việc hoàn tất. Tuy nhiên, bạn vẫn phải dọn dẹp thủ công một vài tài nguyên để tránh chi phí không cần thiết:
-
-1. Tắt Không gian JupyterLab SageMaker sau khi sử dụng. Để biết hướng dẫn, hãy tham khảo [Idle shutdown](#).
-2. Đăng ký Comet gia hạn dựa trên hợp đồng đã chọn. Hủy hợp đồng khi không còn yêu cầu gia hạn đăng ký Comet.
-
-## Lợi ích của tích hợp SageMaker và Comet
-
-Sau khi đã thể hiện quy trình làm việc kỹ thuật, hãy xem xét các lợi ích rộng lớn hơn mà tích hợp này mang lại.
-
-### Phát triển mô hình được đơn giản hóa
-
-Sự kết hợp giữa Comet và SageMaker giảm thiểu chi phí thủ công khi chạy các thí nghiệm ML. Trong khi SageMaker xử lý việc cung cấp và mở rộng cơ sở hạ tầng, việc ghi log tự động của Comet ghi lại các siêu tham số, số liệu, mã, thư viện đã cài đặt, và hiệu suất hệ thống từ các công việc huấn luyện của bạn mà không cần cấu hình bổ sung. Điều này giúp các đội nhóm tập trung vào phát triển mô hình thay vì quản lý sổ sách thí nghiệm. Khả năng hình ảnh hóa của Comet vượt xa các biểu đồ số liệu cơ bản. Các biểu đồ tích hợp cho phép so sánh thí nghiệm nhanh chóng, và các bảng Python tùy chỉnh hỗ trợ các công cụ phân tích đặc thù cho lĩnh vực để gỡ lỗi hành vi mô hình, tối ưu hóa siêu tham số, hoặc tạo các hình ảnh hóa chuyên biệt mà các công cụ tiêu chuẩn không thể cung cấp.
-
-### Hợp tác và quản trị doanh nghiệp
-
-Đối với các đội nhóm doanh nghiệp, sự kết hợp này tạo ra một nền tảng trưởng thành để mở rộng các dự án ML trong các môi trường được quy định. SageMaker cung cấp các môi trường ML nhất quán, an toàn, và Comet cho phép cộng tác liền mạch với việc theo dõi dòng dõi artifact và mô hình hoàn chỉnh. Điều này giúp tránh các sai lầm tốn kém xảy ra khi các đội nhóm không thể tái tạo lại các kết quả trước đó.
-
-### Tích hợp vòng đời ML hoàn chỉnh
-
-Không giống như các giải pháp điểm chỉ giải quyết việc huấn luyện hoặc giám sát, Comet kết hợp với SageMaker hỗ trợ vòng đời ML hoàn chỉnh của bạn. Các mô hình có thể được đăng ký trong sổ đăng ký mô hình của Comet với việc theo dõi phiên bản đầy đủ và quản trị. SageMaker xử lý triển khai mô hình, và Comet duy trì dòng dõi và quy trình phê duyệt để thăng cấp mô hình. Khả năng giám sát sản xuất của Comet theo dõi hiệu suất mô hình và sự trôi dạt dữ liệu sau khi triển khai, tạo ra một vòng lặp khép kín nơi các thông tin chi tiết từ sản xuất thông báo cho vòng thí nghiệm SageMaker tiếp theo của bạn.
+Nếu bạn không cần tầng API, phản hồi luồng Lambda (Lambda response streaming) cho phép một hàm Lambda truyền dần các tải trọng phản hồi trở lại client. Để biết thêm chi tiết, hãy tham khảo Sử dụng Amazon Bedrock với AWS Lambda.
 
 ## Kết luận
-
-Trong bài đăng này, chúng tôi đã thể hiện cách sử dụng SageMaker và Comet cùng nhau để khởi tạo các môi trường ML được quản lý hoàn toàn với khả năng tái tạo và theo dõi thí nghiệm.
-
-Để nâng cao quy trình làm việc SageMaker của bạn với khả năng quản lý thí nghiệm toàn diện, triển khai Comet trực tiếp trong môi trường SageMaker của bạn thông qua AWS Marketplace, và chia sẻ phản hồi của bạn trong phần bình luận.
-
-Để biết thêm thông tin về các dịch vụ và tính năng được thảo luận trong bài đăng này, hãy tham khảo các tài nguyên sau:
-
-- [Thiết lập Ứng dụng AI Đối tác](https://docs.aws.amazon.com/sagemaker/latest/dg/partner-app-onboard.html)
-- [Khởi động nhanh với Comet](https://www.comet.com/docs/v2/guides/quickstart/)
-- [Sổ trên GitHub](https://github.com/aws-samples/generative-ai-on-amazon-sagemaker/tree/main/workshops/partner-ai-apps-with-sagemakerai/comet/Fraud%20Detection)
-- [Tài liệu Comet](https://www.comet.com/docs/v2/)
-- [Nền tảng mã nguồn mở Opik để quan sát LLM](https://github.com/comet-ml/opik)
-
-## Về các tác giả
-
-**Vikesh Pandey** là một Kiến trúc sư Giải pháp Chuyên gia GenAI/ML tại AWS, giúp các tổ chức tài chính lớn áp dụng và mở rộng khối lượng công việc GenAI và ML. Ông là tác giả của cuốn sách “Generative AI for financial services.” Ông có hơn 15 năm kinh nghiệm xây dựng các ứng dụng cấp doanh nghiệp trên GenAI/ML và các công nghệ liên quan. Trong thời gian rảnh rỗi, ông chơi một môn thể thao không tên với con trai mình, nằm giữa bóng đá và bóng bầu dục.
-
-**Naufal Mir** là một Kiến trúc sư Giải pháp Chuyên gia GenAI/ML tại AWS. Ông tập trung vào việc giúp khách hàng xây dựng, huấn luyện, triển khai và di chuyển khối lượng công việc học máy sang SageMaker. Trước đây, ông làm việc tại các tổ chức tài chính phát triển và vận hành các hệ thống quy mô lớn. Ngoài công việc, ông thích chạy bộ và đạp xe đường dài.
-
-**Sarah Ostermeier** là Quản lý Tiếp thị Sản phẩm Kỹ thuật tại Comet. Bà chuyên đưa các sản phẩm dành cho nhà phát triển GenAI và ML của Comet đến với các kỹ sư cần chúng thông qua nội dung kỹ thuật, tài nguyên giáo dục, và thông điệp sản phẩm. Trước đây, bà đã làm việc với tư cách là kỹ sư ML, nhà khoa học dữ liệu, và quản lý thành công khách hàng, giúp khách hàng triển khai và mở rộng các giải pháp AI. Ngoài công việc, bà thích đi du lịch ngoài lề, viết về AI, và đọc khoa học viễn tưởng.
+Bài viết này đã giới thiệu ba mẫu thiết kế áp dụng cho các ứng dụng generative AI thời gian thực: phản hồi yêu cầu đồng bộ, phản hồi yêu cầu bất đồng bộ và streaming response bất đồng bộ. Chúng tôi cũng đã nêu bật cách triển khai các mẫu này bằng các dịch vụ serverless của AWS. Khi lựa chọn mẫu phù hợp cho triển khai của bạn, điều quan trọng là phải xem xét trải nghiệm người dùng cuối mong đợi, technical stack hiện có, giới hạn dịch vụ AWS và độ trễ của phản hồi LLM của bạn. Trong Phần 2, chúng tôi sẽ thảo luận về các mẫu để xây dựng các triển khai batch-oriented generative AI sử dụng các dịch vụ serverless của AWS.

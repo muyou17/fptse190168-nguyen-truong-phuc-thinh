@@ -7,7 +7,7 @@ pre: " <b> 2. </b> "
 ---
 
 
-[Bản Word](/Proposal.docx)
+[Bản Word (chuột phải và chọn *Lưu liên kết dưới dạng…* để tải xuống)](/Proposal.docx)
 
 
 # MealPlan
@@ -30,16 +30,15 @@ Giải pháp này thiết lập một nền tảng toàn diện cho công ty kh�
 
 Trang web được host trên EC2. Dữ liệu được lưu trữ bằng EC2 instance. Hình ảnh được lưu trên S3. Code sẽ dược đẩy lên github nhằm quản lý và tự động đẩy code lên s3 để CodeDeploy sẽ thực hiện deploy lên server. Cloudfront được sử dụng nhằm cải thiện tốc tải. Cognito dùng để quản lý danh tính người dùng. CloudTrail được dùng để giám sát và lữu trữ lịch sử hoạt động. CloudWatch dùng để giám sát và quản lý hiệu suất, tình trạng hoạt động của các tài nguyên và ứng dụng trên AWS. IAM dùng để cấp quyền cho các service. SecretManager được dùng nhằm quản lý các thông tin nhạy cảm.
 
-![AWS Architecture](/images/2-Proposal/AWS_Architecture.jpeg)
+![AWS Architecture](/images/2-Proposal/architecture.jpeg)
 
 *Dịch vụ AWS sử dụng*  
 - *WAF*: Bảo vệ ứng dụng web khỏi các tấn công mạng
 - *AWS CloudFront*: Tăng tốc độ tải trang web.  
-- *AWS EC2*: Deploy sản phẩm, NAT instance, Database.
-- *AWS VPC*: là mạng ảo.  
+- *AWS EC2*: Triển khai ứng dụng, cơ sở dữ liệu, NAT instance.
+- *AWS VPC*: Là mạng ảo.  
 - *AWS S3*: Lưu trữ code, file log, hình ảnh.
 - *CodeDeploy*: Deploy code lên EC2.
-- *GitLab*: chứa source code và push code lên s3.
 - *Amazon Cognito*: Quản lý quyền truy cập cho người dùng trang web.  
 - *IAM*: Tạo user và role.
 - *Secret Manager*: Chứa các thông tin quan trọng.
@@ -110,7 +109,7 @@ Sử dụng caching của CloudFront để giảm sự phụ thuộc vào dịch
 
 *Kế hoạch dự phòng*  
 ⦁	Tự động rollback thông qua CodeDeploy.
-⦁	Dự phòng thủ công: GitLab runner → prebuilt AMIs hoặc ASGs
+⦁	Dự phòng thủ công: GitLab runner → prebuilt AMI hoặc ASG
 
 ### 8. Kết quả kỳ vọng  
 ⦁	CI/CD hoàn toàn tự động (GitLab → CodePipeline → CodeBuild → CodeDeploy) giảm lỗi thủ công.

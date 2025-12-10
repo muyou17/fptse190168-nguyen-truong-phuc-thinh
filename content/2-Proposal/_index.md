@@ -7,7 +7,7 @@ pre: " <b> 2. </b> "
 ---
 
 
-[Word document version](/Proposal.docx)
+[Word document version (right-click and choose *Save link as…* to download)](/Proposal.docx)
 
 
 # MealPlan

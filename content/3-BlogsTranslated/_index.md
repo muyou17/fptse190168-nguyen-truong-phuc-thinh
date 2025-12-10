@@ -7,11 +7,11 @@ pre: " <b> 3. </b> "
 ---
 
 
-###  [Blog 1 - Rapid ML experimentation for enterprises with Amazon SageMaker AI and Comet](3.1-Blog1/)
-This blog explores how enterprises can leverage Amazon SageMaker AI and Comet to streamline machine learning (ML) experimentation for scalable and reproducible workflows. It highlights the importance of robust experiment tracking, model lineage, and compliance in handling complex ML initiatives, particularly in regulated environments. The article demonstrates a fraud detection use case, guiding readers through setting up a managed ML environment, integrating Comet for experiment management, and processing imbalanced datasets. It also covers ensuring regulatory compliance (e.g., EU AI regulations) and provides steps for administrators and users to configure and utilize SageMaker AI with Comet effectively.
+###  [Blog 1 - Serverless generative AI architectural patterns – Part 1](3.1-Blog1/)
+This two-part series explores the different architectural patterns, best practices, code implementations, and design considerations essential for successfully integrating generative AI solutions into both new and existing applications. In this post, we focus on patterns applicable for architecting real-time generative AI applications. Part 2 addresses patterns for building batch-oriented generative AI implementations using serverless services.
 
-###  [Blog 2 - ...](3.2-Blog2/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+###  [Blog 2 - Reduce your Amazon ElastiCache costs by up to 60% with Valkey and CUDOS](3.2-Blog2/)
+This blog shows you how to save costs on Amazon ElastiCache by upgrading your cluster engine to ElastiCache for Valkey. If you’re currently using ElastiCache for Redis OSS, you can achieve up to 60% cost savings by upgrading to Valkey.
 
-###  [Blog 3 - ...](3.3-Blog3/)
-This blog introduces how to start building a data lake in the healthcare sector by applying a microservices architecture. You will learn why data lakes are important for storing and analyzing diverse healthcare data (electronic medical records, lab test data, medical IoT devices…), how microservices help make the system more flexible, scalable, and easier to maintain. The article also guides you through the steps to set up the environment, organize the data processing pipeline, and ensure compliance with security & privacy standards such as HIPAA.
+###  [Blog 3 - Getting started with Amazon EC2 bare metal instances for Amazon RDS for Oracle and Amazon RDS Custom for Oracle](3.3-Blog3/)
+This blog explores the support for AWS bare metal instances on Amazon EC2 bare metal Instances for Amazon RDS for Oracle and RDS Custom for Oracle.
